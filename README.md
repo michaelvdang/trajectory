@@ -5,6 +5,10 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 Trajectory:
 create .env.local from .env.local.template
 run: npm install
+
+(if you're using your own pinecone db (using different pinecone key))
+run: node pinecone/initPinecone.js
+
 run: node index.js
 
 
