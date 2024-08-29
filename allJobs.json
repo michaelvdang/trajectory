@@ -1,0 +1,70 @@
+{
+  "jobs": [
+    {
+      "title": "Software Engineer",
+      "similar_titles": [
+        "Software Developer",
+        "Full-Stack Software Developer",
+        "Front-End Software Developer",
+        "Back-End Software Developer"
+      ],
+      "skills_needed": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "npm",
+        "git",
+        "GitHub",
+        "React",
+        "TailwindCSS",
+        "Node.js",
+        "SQL",
+        "NoSQL",
+        "RESTful APIs",
+        "JWT Auth",
+        "Linux Basics",
+        "Basic AWS services",
+        "CI/CD concepts",
+        "Terraform"
+      ]
+    },
+    {
+      "title": "Cyber Security Expert",
+      "similar_titles": [
+        "Security Engineer",
+        "Security Consultant",
+        "Security Analyst"
+      ],
+      "skills_needed": [
+        "Fundamental IT skills",
+        "Operating systems",
+        "Networking knowledge",
+        "Network security skills and knowledge",
+        "Cloud skills and knowledge",
+        "Programming skills"
+      ]
+    },
+    {
+      "title": "PostgreSQL DBA",
+      "similar_titles": [
+        "Database Analyst",
+        "Database Architect",
+        "SQL Developer"
+      ],
+      "skills_needed": [
+        "Basic RDBMS concepts",
+        "Install PostgreSQL",
+        "Learn SQL",
+        "Configuring PostgreSQL",
+        "Database security",
+        "Database infrastructure skills",
+        "Database automation",
+        "Database migrations",
+        "Data and processing",
+        "Advanced SQL",
+        "Troubleshooting techniques",
+        "SQL optimization techniques"
+      ]
+    }
+  ]
+}
