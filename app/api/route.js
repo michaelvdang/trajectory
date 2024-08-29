@@ -24,9 +24,9 @@ export async function POST(request) {
   console.log('queryResults.matches[0].id: ', queryResults.matches[0].id);
 
   if (queryResults.matches) {
-    return new Response({
-      message: JSON.stringify(queryResults),
-      
+    return new Response(JSON.stringify(queryResults), {
+      headers: { 'Content-Type': 'application/json' },
+      status: 200
     })
   }
 
