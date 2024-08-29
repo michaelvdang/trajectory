@@ -15,6 +15,7 @@ export async function POST(request) {
   const embedding = await generateEmbeddings(JSON.stringify(input));
   console.log('embedding: ', embedding);
 
+  // query pinecone for similar jobs
   const queryResults = await queryPinecone(embedding.data[0].embedding);
 
   if (queryResults.matches) {
