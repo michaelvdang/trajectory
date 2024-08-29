@@ -1,0 +1,31 @@
+{
+  "note": "basic data model",
+  "positionId": "frontend-developer",
+  "positionTitle": "Frontend Developer",
+  "requiredSkills": [
+    {
+      "skillName": "HTML",
+      "category": "Web Development",
+      "priority": 5,
+      "level": "basic"
+    },
+    {
+      "skillName": "CSS",
+      "category": "Web Development",
+      "priority": 5,
+      "level": "basic"
+    },
+    {
+      "skillName": "JavaScript",
+      "category": "Programming",
+      "priority": 3,
+      "level": "intermediate"
+    },
+    {
+      "skillName": "React",
+      "category": "Frameworks",
+      "priority": 3,
+      "level": "intermediate"
+    }
+  ]
+}
