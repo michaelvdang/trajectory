@@ -1,7 +1,6 @@
 import generateEmbeddings from "@/services/generateEmbeddings";
 import queryPinecone from "@/services/queryPinecone";
 
-
 export async function GET(request) {
   return new Response('Hello, Next.js!')
 }
