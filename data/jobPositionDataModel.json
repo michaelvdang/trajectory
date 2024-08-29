@@ -7,25 +7,31 @@
       "skillName": "HTML",
       "category": "Web Development",
       "priority": 5,
-      "level": "basic"
+      "difficulty": 2
     },
     {
       "skillName": "CSS",
       "category": "Web Development",
       "priority": 5,
-      "level": "basic"
+      "difficulty": 2
     },
     {
       "skillName": "JavaScript",
       "category": "Programming",
       "priority": 3,
-      "level": "intermediate"
+      "difficulty": 3
     },
     {
       "skillName": "React",
       "category": "Frameworks",
       "priority": 3,
-      "level": "intermediate"
+      "difficulty": 4
+    },
+    {
+      "skillName": "Jenkins",
+      "category": "DevOps",
+      "priority": 1,
+      "difficulty": 5
     }
   ]
 }
