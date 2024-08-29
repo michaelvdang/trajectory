@@ -1,12 +1,11 @@
 
 
 
-import allJobs from './allJobs.json' with {type: "json"};
-import generateEmbeddings from './generateEmbeddings.js';
+import allJobs from '../data/allJobs.json' with {type: "json"};
+import generateEmbeddings from '../services/generateEmbeddings.js';
 import { Pinecone } from '@pinecone-database/pinecone';
 import dotenv from 'dotenv';
-import 'dotenv/config'; // If using ES Module
-// require('dotenv').config(); // If using CommonJS
+import 'dotenv/config'; 
 const result = dotenv.config({ path: '.env.local' });
 
 console.log('PINECONE_API_KEY : ' + process.env.PINECONE_API_KEY);
@@ -31,9 +30,11 @@ for (let i = 0; i < jobsData.length; i++) {
 
 console.log('processedJobs: ', processedJobs);
 
-// // store in vector db
+// // store in Pinecone
 const pc = new Pinecone({ apiKey: process.env.PINECONE_API_KEY });
 const index = pc.index('trajectory-app')
 await index.namespace('ns1').upsert(processedJobs);
+
+console.log('inserted into Pinecone: ', processedJobs.length, 'jobs');
 
 
