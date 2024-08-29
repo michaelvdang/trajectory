@@ -2,6 +2,12 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+Trajectory:
+create .env.local from .env.local.template
+run: npm install
+run: node index.js
+
+
 First, run the development server:
 
 ```bash
