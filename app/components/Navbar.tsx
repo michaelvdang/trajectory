@@ -4,7 +4,6 @@ import {
   SignedIn,
   SignedOut,
   SignInButton,
-  SignOutButton,
   UserButton,
 } from "@clerk/nextjs";
 
@@ -34,9 +33,6 @@ const Navbar: React.FC = () => {
           <SignedIn>
             <li>
               <UserButton />
-            </li>
-            <li>
-              <SignOutButton />
             </li>
           </SignedIn>
         </ul>
