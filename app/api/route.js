@@ -7,10 +7,8 @@ export async function GET(request) {
 }
 
 export async function POST(request) {
+  try {
   const data = await request.json()
-  
-  console.log('JSON.parse(data.message): ', JSON.parse(data.message));
-  console.log('data.message: ', data.message);
 
   const input = JSON.parse(data.message);
   
@@ -20,16 +18,25 @@ export async function POST(request) {
 
   const queryResults = await queryPinecone(embedding.data[0].embedding);
 
-  console.log('queryResults: ', queryResults);
-  console.log('queryResults.matches[0].id: ', queryResults.matches[0].id);
-
   if (queryResults.matches) {
     return new Response(JSON.stringify(queryResults), {
       headers: { 'Content-Type': 'application/json' },
       status: 200
     })
   }
+  else {
+    return new Response('No results found', {
+      headers: { 'Content-Type': 'application/json' },
+      status: 404
+    })
+  }
+  }
+  catch (error) {
+    console.log('error: ', error);
 
-  return new Response('route: POST /api')
-  
+    return new Response(JSON.stringify(error), {
+      headers: { 'Content-Type': 'application/json' },
+      status: 500
+    })
+  }
 }
