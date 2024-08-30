@@ -41,6 +41,8 @@ const FileSvgDraw = () => {
 const FileUploaderBox = () => {
   const [files, setFiles] = useState<File[] | null>(null);
   const [uploadStatus, setUploadStatus] = useState<string>("");
+  const userId = '123';
+  const [topMatches, setTopMatches] = useState<any[]>([]);
 
   const dropZoneConfig = {
     maxFiles: 1,
@@ -48,28 +50,55 @@ const FileUploaderBox = () => {
     multiple: false,
   };
 
+    // on success, trigger parser for resume by sending s3 file path
+  const handleSuccess = async (userId: string, fileName: string) => {
+    // send filePath (userId, fileName) to parseInit to download from s3
+    const response = await fetch(`http://localhost:3000/api/parseInit`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId, fileName }),
+    });
+    if (response.ok) {
+      console.log('success');
+    }
+    const data = await response.json();
+    console.log('data from response: ', data);
+    console.log(JSON.stringify(data))
+
+    setTopMatches(data.data.topMatches);
+  }
+
   const handleUpload = async () => {
+    setTopMatches([]);
+    
+    if (!files) return;
+
+    const formData = new FormData();
+    const fileName = files[0].name;
+    // validate fileName for illegal characters
+    formData.append('fileName', fileName);
+    Array.from(files).forEach(file => {
+      formData.append('files', file);
+    });
+
     try {
-      setUploadStatus("Uploading file...");
-      const formData = new FormData();
-      formData.append("file", files[0]);
-
-      const response = await axios.post("/api/upload", formData, {
+      setUploadStatus('Uploading...');
+      const response = await axios.post(`/api/users/${userId}/upload`, formData, {
         headers: {
-          "Content-Type": "multipart/form-data",
-        },
+          'Content-Type': 'multipart/form-data'
+        }
       });
-
       if (response.status !== 200) {
-        throw new Error("Upload failed.");
+        throw new Error('Upload failed.');
       }
-
-      setUploadStatus("Upload successful!");
-      setFiles(null);
-      console.log(response.data);
+      setUploadStatus('successful');
+      // trigger resume parser
+      handleSuccess(userId, fileName);
     } catch (error) {
-      console.error("Error uploading file:", error);
-      setUploadStatus("Upload failed.");
+      console.error('Error uploading file:', error);
+      setUploadStatus('failed');
     }
   };
 
@@ -108,6 +137,7 @@ const FileUploaderBox = () => {
       {uploadStatus && (
         <p className="mt-4 text-sm text-gray-500">{uploadStatus}</p>
       )}
+      {topMatches?.length > 0 && <p>Top matches: {JSON.stringify(topMatches)}</p>}
     </div>
   );
 };
