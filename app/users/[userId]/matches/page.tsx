@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import Profile from "@/components/Profile";
 import Match from "@/components/Match";
+import { useUser } from "@clerk/nextjs";
 
 interface UserData {
   languages: string[];
@@ -25,8 +26,16 @@ export default function Jobs() {
   const [userData, setUserData] = useState<UserData>(null);
   const [topMatches, setTopMatches] = useState<MatchData[]>([]);
   const searchParams = useSearchParams();
-  const userId = searchParams.get("userId");
+  const { isLoaded, isSignedIn, user} = useUser();
+  const [userId, setUserId] = useState<string>(null);
+  // const userId = searchParams.get("userId");
   const fileName = searchParams.get("fileName");
+
+  useEffect(() => {
+    if (isLoaded && isSignedIn && user) {
+      setUserId(user.id);
+    }
+  }, [isLoaded, isSignedIn, user]);
 
   useEffect(() => {
     if (userId && fileName) {

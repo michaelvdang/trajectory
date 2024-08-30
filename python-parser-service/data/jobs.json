@@ -1,5 +1,6 @@
 [
   {
+    "job_id": "software_engineer",
     "title": "Software Engineer",
     "skills_needed": [
       "HTML",
@@ -22,6 +23,7 @@
     ]
   },
   {
+    "job_id": "cyber_security_expert",
     "title": "Cyber Security Expert",
     "skills_needed": [
       "Fundamental IT skills",
@@ -33,6 +35,7 @@
     ]
   },
   {
+    "job_id": "database_administrator",
     "title": "Database Administrator",
     "skills_needed": [
       "Basic RDBMS concepts",
@@ -53,6 +56,7 @@
     ]
   },
   {
+    "job_id": "frontend_developer",
     "title": "Frontend Developer",
     "skills_needed": [
       "HTML",
@@ -74,6 +78,7 @@
     ]
   },
   {
+    "job_id": "backend_developer",
     "title": "Backend Developer",
     "skills_needed": [
       "Node.js",
@@ -99,6 +104,7 @@
     ]
   },
   {
+    "job_id": "devops_engineer",
     "title": "DevOps Engineer",
     "skills_needed": [
       "Linux",
@@ -122,6 +128,7 @@
     ]
   },
   {
+    "job_id": "mobile_app_developer",
     "title": "Mobile App Developer",
     "skills_needed": [
       "Java",
@@ -143,6 +150,7 @@
     ]
   },
   {
+    "job_id": "data_scientist",
     "title": "Data Scientist",
     "skills_needed": [
       "Python",

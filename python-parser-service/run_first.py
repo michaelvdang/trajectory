@@ -27,8 +27,11 @@ def load_sample_data():
 
     jobs = json.loads(open("data/jobs.json").read())
 
+    print('jobs: ', jobs)
+
     for job in jobs:
         # Inserts the complaint into the Pinecone index with the complaint text as the vector
+        job_id = job['job_id']
         title = job['title']
         skills = job['skills_needed']
 
@@ -45,9 +48,10 @@ def load_sample_data():
         index.upsert(
             vectors=[
                 {
-                    "id": title,
+                    "id": job_id,
                     "values": embedding,
                     "metadata": {
+                        "job_id": job_id,
                         "title": title,
                         "skills": skills
                     }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   FileUploader,
   FileUploaderContent,
@@ -11,6 +11,7 @@ import { Paperclip } from "lucide-react";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import { useUser } from "@clerk/nextjs";
 
 const FileSvgDraw = () => {
   return (
@@ -43,7 +44,10 @@ const FileSvgDraw = () => {
 const FileUpload = () => {
   const [files, setFiles] = useState<File[] | null>(null);
   const [uploadStatus, setUploadStatus] = useState<string>("");
-  const userId = '123';
+  const { isLoaded, isSignedIn, user } = useUser();
+  const [userId, setUserId] = useState<string>('');
+  // const userId = '123';
+  const [fileName, setFileName] = useState<string>('');
   const router = useRouter();
 
   const dropZoneConfig = {
@@ -52,14 +56,35 @@ const FileUpload = () => {
     multiple: false,
   };
 
+  useEffect(() => {
+    if (isLoaded && isSignedIn && user) {
+      setUserId(user.id);
+    }
+  }, [isLoaded, isSignedIn, user]);
+
+  useEffect(() => {
+    if (uploadStatus === 'successful') {
+      // ask user to enter target jobs or navigate to /users/[userId]/matches
+      router.push(`/users/${userId.slice(-10)}/matches?fileName=${fileName}`);
+      setTimeout(() => {
+        setUploadStatus('');
+        setFileName('');
+      }, 3000);
+    }
+  }, [uploadStatus]);
 
   const handleUpload = async () => {    
     if (!files) return;
+    if (!isLoaded || !isSignedIn || !user) {
+      return;
+    }
 
     const formData = new FormData();
     const fileName = files[0].name;
+    setFileName(fileName);
     // validate fileName for illegal characters
     formData.append('fileName', fileName);
+    formData.append('userId', userId);
     Array.from(files).forEach(file => {
       formData.append('files', file);
     });
@@ -75,8 +100,7 @@ const FileUpload = () => {
         throw new Error('Upload failed.');
       }
       setUploadStatus('successful');
-     // Navigate to /jobs with userId and fileName as query parameters
-     router.push(`/jobs?userId=${userId}&fileName=${fileName}`);
+     // useEffect hook to display target job dialog or avigate to /matches with userId and fileName as query parameters
     } catch (error) {
       console.error('Error uploading file:', error);
       setUploadStatus('failed');

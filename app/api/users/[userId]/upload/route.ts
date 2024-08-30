@@ -10,13 +10,14 @@ export async function POST(
   request: NextRequest,
   context: { params: { userId: string } },
   ) {
-  const { userId } = context.params;
+  // const { userId } = context.params;
 
   try {
     const formData = await request.formData();
     // validate fileName for illegal characters
     const fileName = formData.get('fileName') as string;
     const files = formData.getAll("files") as File[];
+    const userId = formData.get('userId') as string;
 
     const responses = await uploadFilesS3(userId, fileName, files);
 

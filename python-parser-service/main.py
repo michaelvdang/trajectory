@@ -35,13 +35,10 @@ async def get_image(file: UploadFile = File(...),
     with open(file_path, "wb") as f:
         f.write(await file.read())
 
-    # return {'message': 'success'}
-    # # parse resume
-    ## use resume parser to get json
+    # parse resume
+    # use resume parser to get json
     resume_text = parse_resume(file_path)
-
     print(resume_text)
-
     resume_json = {
         'languages': resume_text.languages,
         'skills': resume_text.skills,
@@ -54,10 +51,7 @@ async def get_image(file: UploadFile = File(...),
 
     # ## use hard coded json (similar to parsed json)
     # resume_json = json.load(open("resume_json.json"))
-
     # print('resume_json: ', resume_json)
-    ## use only skills to get job results
-    # skill_list = ['ReactJS/React Native','Jest','Reanimated','ExpressJS','Tailwind CSS','FastAPI','AWS EC2/S3/CloudFront/Lambda','Firestore','PostgreSQL','Docker','Stripe','Jenkins','git']
     
     # send to nextjs api to get job results    
     response = requests.post('http://localhost:3000/api/search', json={'message': json.dumps({
@@ -75,7 +69,8 @@ async def get_image(file: UploadFile = File(...),
     for match in matches:
        topMatches.append(
            {
-               'title': match['id'],
+               'job_id': match['id'],
+               'title': match['metadata']['title'],
                'skills': match['metadata']['skills'],
                'score': match['score']
            }
