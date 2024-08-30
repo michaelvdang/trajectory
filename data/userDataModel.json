@@ -15,11 +15,16 @@
     }
   ],
   "targetPosition": "Frontend Developer",
-  "progress": {
-    "completedSkills": ["HTML", "CSS"],
-    "ongoingSkills": ["JavaScript"],
-    "pendingSkills": ["React", "TypeScript"]
-  },
+  "matchedPositions": [
+    {
+      "positionId": "frontend-developer",
+      "positionTitle": "Frontend Developer",
+    },
+    {
+      "positionId": "backend-developer",
+      "positionTitle": "Backend Developer"
+    }
+  ],
   "resume": {
     "uploadedFilePath": "/path/to/resume.pdf",
     "parsedContent": {
