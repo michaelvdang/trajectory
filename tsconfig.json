@@ -30,7 +30,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "services/queryPinecone.ts", "services/generateEmbeddings.js", "services/s3.ts", "services/uploadFilesS3.ts"  ],
   "exclude": [
     "node_modules"
   ]
