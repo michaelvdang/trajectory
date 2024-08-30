@@ -1,12 +1,11 @@
-import FileUploaderBox from "@/components/FileUpload";
-import Upload from "./upload/page";
+import FileUpload from "./upload/page";
 import React from 'react';
 import MainLayout from './layouts/MainLayout';
 import HeroSection from './components/HeroSection';
 
 const HomePage: React.FC = () => {
   return (
-    <Upload />
+    <FileUpload />
     // <MainLayout>
     //   <HeroSection />
     // </MainLayout>

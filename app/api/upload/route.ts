@@ -33,8 +33,6 @@ export async function GET(request: Request) {
     });
     
     return NextResponse.json({ lastModified: response?.LastModified ?? []});
-
-    return new Response('Hello, Next.js!')
   }
   catch (error) {
     console.log('error: ', error);

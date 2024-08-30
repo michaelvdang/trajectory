@@ -21,7 +21,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 @app.post("/parse")
 async def get_image(file: UploadFile = File(...),
     directory: str = Form(...),
@@ -61,11 +60,31 @@ async def get_image(file: UploadFile = File(...),
     # skill_list = ['ReactJS/React Native','Jest','Reanimated','ExpressJS','Tailwind CSS','FastAPI','AWS EC2/S3/CloudFront/Lambda','Firestore','PostgreSQL','Docker','Stripe','Jenkins','git']
     
     # send to nextjs api to get job results    
-    response = requests.post('http://localhost:3000/api/search', json={'message': json.dumps(resume_json)})
+    response = requests.post('http://localhost:3000/api/search', json={'message': json.dumps({
+        'skills': resume_json['skills'],
+        'languages': resume_json['languages'],
+        'experiences': resume_json['experiences'],
+        'projects': resume_json['projects'],
+        'certifications': resume_json['certifications'],
+    })})
     data = response.json()
     print('matching job titles: ', [d['id'] for d in data['matches']])
+    
+    topMatches= []
+    matches = data['matches']
+    for match in matches:
+       topMatches.append(
+           {
+               'title': match['id'],
+               'skills': match['metadata']['skills'],
+               'score': match['score']
+           }
+       )
 
-    return {'topMatches': [match['id'] for match in data['matches']]}
+    return {
+        'topMatches': topMatches,
+        'userData': resume_json
+        }
 
 def parse_resume(file_path):
     reader = PdfReader(file_path)
