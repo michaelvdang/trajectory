@@ -46,21 +46,21 @@ export async function GET(request: Request) {
   }
 }
 
-// endpoint to upload a file to s3 bucket
-export async function POST(request: NextRequest) {
-  try {
-    const formData = await request.formData();
-    console.log('formData', formData);
+// // endpoint to upload a file to s3 bucket
+// export async function POST(request: NextRequest) {
+//   try {
+//     const formData = await request.formData();
+//     console.log('formData', formData);
     
-    const files = formData.getAll("files") as File[];
-    console.log('files', files);
+//     const files = formData.getAll("files") as File[];
+//     console.log('files', files);
 
-    const responses = await uploadFilesS3(files);
+//     const responses = await uploadFilesS3(files);
 
-    console.log('responses', responses);
-    return NextResponse.json(responses);
-  } catch (error: any) {
-    console.error('Error handling request:', error);
-    return NextResponse.json({ error: error.message });
-  }
-}
+//     console.log('responses', responses);
+//     return NextResponse.json(responses);
+//   } catch (error: any) {
+//     console.error('Error handling request:', error);
+//     return NextResponse.json({ error: error.message });
+//   }
+// }

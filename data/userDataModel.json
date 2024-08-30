@@ -5,12 +5,12 @@
   "currentSkills": [
     {
       "skillName": "JavaScript",
-      "proficiencyLevel": "intermediate",
+      "proficiencyLevel": 3,
       "experienceYears": 2
     },
     {
       "skillName": "React",
-      "proficiencyLevel": "beginner",
+      "proficiencyLevel": 1,
       "experienceYears": 1
     }
   ],
