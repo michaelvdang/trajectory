@@ -1,0 +1,36 @@
+{
+  "userId": "unique-user-id",
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "currentSkills": [
+    {
+      "skillName": "JavaScript",
+      "proficiencyLevel": 3,
+      "experienceYears": 2
+    },
+    {
+      "skillName": "React",
+      "proficiencyLevel": 1,
+      "experienceYears": 1
+    }
+  ],
+  "targetPosition": "Frontend Developer",
+  "progress": {
+    "completedSkills": ["HTML", "CSS"],
+    "ongoingSkills": ["JavaScript"],
+    "pendingSkills": ["React", "TypeScript"]
+  },
+  "resume": {
+    "uploadedFilePath": "/path/to/resume.pdf",
+    "parsedContent": {
+      "summary": "A brief summary...",
+      "languages": [  ],
+      "skills": [  ],
+      "workExperience": [  ],
+      "education": [  ],
+      "activities": [  ],
+      "projects": [  ],
+      "certifications": [  ]
+    }
+  }
+}

@@ -3,6 +3,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## Getting Started
 
 Trajectory:
+Start Nextjs app and API
 create .env.local from .env.local.template
 run: npm install
 
@@ -11,6 +12,12 @@ run: node pinecone/initPinecone.js
 
 run: node index.js
 
+Start Python parser:
+cd python-parser-server 
+python3 -r pip install -r requirements.txt
+python3 main.py --reload
+
+Upload resume and see returned job titles (there are only 3 job titles in pinecone for now based on the pinecone/initPinecone.js and data/allJobs.json file)
 
 First, run the development server:
 

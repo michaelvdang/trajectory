@@ -1,0 +1,22 @@
+{
+  "skillName": "JavaScript",
+  "estimatedTimeToLearn": "2-3 weeks",
+  "difficulty": 3,
+  "description": "A versatile programming language primarily used for web development.",
+  "prerequisites": ["HTML", "CSS"],
+
+
+  "note": "below skills might not be necessary for prototype",
+  "learningResources": [
+    {
+      "resourceTitle": "JavaScript Basics - MDN",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide",
+      "type": "documentation"
+    },
+    {
+      "resourceTitle": "JavaScript Tutorial - freeCodeCamp",
+      "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/",
+      "type": "course"
+    }
+  ]
+}

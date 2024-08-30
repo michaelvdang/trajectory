@@ -5,6 +5,9 @@ export async function GET(request) {
   return new Response('Hello, Next.js!')
 }
 
+// take input from resume parser
+// search pinecone for similar jobs 
+// return embeddings of similar jobs along with metadata with job titles
 export async function POST(request) {
   try {
   const data = await request.json()
@@ -15,6 +18,7 @@ export async function POST(request) {
   const embedding = await generateEmbeddings(JSON.stringify(input));
   console.log('embedding: ', embedding);
 
+  // query pinecone for similar jobs
   const queryResults = await queryPinecone(embedding.data[0].embedding);
 
   if (queryResults.matches) {

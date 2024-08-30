@@ -1,0 +1,32 @@
+{
+  "note": "basic data model",
+  "positionId": "frontend-developer",
+  "positionTitle": "Frontend Developer",
+  "requiredSkills": [
+    {
+      "skillName": "HTML",
+      "priority": 5,
+      "difficulty": 2
+    },
+    {
+      "skillName": "CSS",
+      "priority": 5,
+      "difficulty": 2
+    },
+    {
+      "skillName": "JavaScript",
+      "priority": 3,
+      "difficulty": 3
+    },
+    {
+      "skillName": "React",
+      "priority": 3,
+      "difficulty": 4
+    },
+    {
+      "skillName": "Jenkins",
+      "priority": 1,
+      "difficulty": 5
+    }
+  ]
+}
