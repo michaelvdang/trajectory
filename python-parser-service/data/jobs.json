@@ -1,0 +1,171 @@
+[
+  {
+    "title": "Software Engineer",
+    "skills_needed": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "npm",
+      "git",
+      "GitHub",
+      "React",
+      "TailwindCSS",
+      "Node.js",
+      "SQL",
+      "NoSQL",
+      "RESTful APIs",
+      "JWT Auth",
+      "Linux Basics",
+      "Basic AWS services",
+      "CI/CD concepts",
+      "Terraform"
+    ]
+  },
+  {
+    "title": "Cyber Security Expert",
+    "skills_needed": [
+      "Fundamental IT skills",
+      "Operating systems",
+      "Networking knowledge",
+      "Network security skills and knowledge",
+      "Cloud skills and knowledge",
+      "Programming skills"
+    ]
+  },
+  {
+    "title": "Database Administrator",
+    "skills_needed": [
+      "Basic RDBMS concepts",
+      "SQL",
+      "Joins",
+      "MySQL",
+      "Indexes",
+      "Database design",
+      "PostgreSQL",
+      "Database security",
+      "Database infrastructure skills",
+      "Database automation",
+      "Database migrations",
+      "Data and processing",
+      "Advanced SQL",
+      "Troubleshooting techniques",
+      "SQL optimization techniques"
+    ]
+  },
+  {
+    "title": "Frontend Developer",
+    "skills_needed": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "React",
+      "Vue.js",
+      "Angular",
+      "Sass",
+      "Webpack",
+      "Babel",
+      "Responsive Design",
+      "Cross-Browser Compatibility",
+      "Git",
+      "GitHub",
+      "UI/UX Design Principles",
+      "Accessibility",
+      "Performance Optimization"
+    ]
+  },
+  {
+    "title": "Backend Developer",
+    "skills_needed": [
+      "Node.js",
+      "Express.js",
+      "Python",
+      "Django",
+      "Flask",
+      "Ruby on Rails",
+      "Java",
+      "Spring Boot",
+      "SQL",
+      "NoSQL",
+      "RESTful APIs",
+      "GraphQL",
+      "Docker",
+      "Kubernetes",
+      "Microservices",
+      "CI/CD",
+      "Git",
+      "GitHub",
+      "Linux",
+      "AWS"
+    ]
+  },
+  {
+    "title": "DevOps Engineer",
+    "skills_needed": [
+      "Linux",
+      "Shell Scripting",
+      "Python",
+      "Docker",
+      "Kubernetes",
+      "CI/CD",
+      "Jenkins",
+      "Git",
+      "GitHub",
+      "AWS",
+      "Azure",
+      "Google Cloud Platform",
+      "Terraform",
+      "Ansible",
+      "Puppet",
+      "Monitoring Tools",
+      "Networking",
+      "Security Best Practices"
+    ]
+  },
+  {
+    "title": "Mobile App Developer",
+    "skills_needed": [
+      "Java",
+      "Kotlin",
+      "Swift",
+      "Objective-C",
+      "React Native",
+      "Flutter",
+      "Dart",
+      "Android SDK",
+      "iOS SDK",
+      "RESTful APIs",
+      "GraphQL",
+      "Git",
+      "GitHub",
+      "UI/UX Design Principles",
+      "Performance Optimization",
+      "Testing and Debugging"
+    ]
+  },
+  {
+    "title": "Data Scientist",
+    "skills_needed": [
+      "Python",
+      "R",
+      "SQL",
+      "NoSQL",
+      "Pandas",
+      "NumPy",
+      "Scikit-Learn",
+      "TensorFlow",
+      "Keras",
+      "PyTorch",
+      "Data Visualization",
+      "Matplotlib",
+      "Seaborn",
+      "Machine Learning",
+      "Deep Learning",
+      "Statistics",
+      "Big Data Technologies",
+      "Hadoop",
+      "Spark",
+      "Data Cleaning",
+      "Data Wrangling"
+    ]
+  }
+]
