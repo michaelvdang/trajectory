@@ -1,7 +1,6 @@
 
 import json
 import os
-import uuid
 
 from dotenv import load_dotenv
 from openai import OpenAI
@@ -46,7 +45,7 @@ def load_sample_data():
         index.upsert(
             vectors=[
                 {
-                    "id": str(uuid.uuid4()),
+                    "id": title,
                     "values": embedding,
                     "metadata": {
                         "title": title,
