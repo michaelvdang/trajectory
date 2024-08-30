@@ -1,7 +1,7 @@
 import OpenAI from 'openai';
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.OPENAI_API_KEY || "sk-proj-p6DMz7dkbdDAOYDit67DT3BlbkFJ39KynVZBXLaJTNm8HLCH",
 });
 
 async function generateEmbeddings(input) {
