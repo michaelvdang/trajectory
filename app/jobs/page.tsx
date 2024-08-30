@@ -54,10 +54,13 @@ export default function Jobs() {
     setUserData(data.data.userData);
   };
 
-  useEffect(() => {
-    console.log("userData:", userData);
-    console.log("topMatches:", topMatches);
-  }, [userData, topMatches]);
+  if (!userData || topMatches.length === 0) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="text-2xl font-bold">Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg">

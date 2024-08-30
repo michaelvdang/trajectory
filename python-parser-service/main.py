@@ -60,7 +60,13 @@ async def get_image(file: UploadFile = File(...),
     # skill_list = ['ReactJS/React Native','Jest','Reanimated','ExpressJS','Tailwind CSS','FastAPI','AWS EC2/S3/CloudFront/Lambda','Firestore','PostgreSQL','Docker','Stripe','Jenkins','git']
     
     # send to nextjs api to get job results    
-    response = requests.post('http://localhost:3000/api/search', json={'message': json.dumps(resume_json)})
+    response = requests.post('http://localhost:3000/api/search', json={'message': json.dumps({
+        'skills': resume_json['skills'],
+        'languages': resume_json['languages'],
+        'experiences': resume_json['experiences'],
+        'projects': resume_json['projects'],
+        'certifications': resume_json['certifications'],
+    })})
     data = response.json()
     print('matching job titles: ', [d['id'] for d in data['matches']])
     
