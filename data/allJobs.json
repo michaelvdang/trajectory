@@ -3,12 +3,6 @@
   "jobs": [
     {
       "title": "Software Engineer",
-      "similar_titles": [
-        "Software Developer",
-        "Full-Stack Software Developer",
-        "Front-End Software Developer",
-        "Back-End Software Developer"
-      ],
       "skills_needed": [
         "HTML",
         "CSS",
@@ -31,11 +25,6 @@
     },
     {
       "title": "Cyber Security Expert",
-      "similar_titles": [
-        "Security Engineer",
-        "Security Consultant",
-        "Security Analyst"
-      ],
       "skills_needed": [
         "Fundamental IT skills",
         "Operating systems",
@@ -47,11 +36,6 @@
     },
     {
       "title": "PostgreSQL DBA",
-      "similar_titles": [
-        "Database Analyst",
-        "Database Architect",
-        "SQL Developer"
-      ],
       "skills_needed": [
         "Basic RDBMS concepts",
         "Install PostgreSQL",

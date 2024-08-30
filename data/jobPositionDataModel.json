@@ -5,31 +5,26 @@
   "requiredSkills": [
     {
       "skillName": "HTML",
-      "category": "Web Development",
       "priority": 5,
       "difficulty": 2
     },
     {
       "skillName": "CSS",
-      "category": "Web Development",
       "priority": 5,
       "difficulty": 2
     },
     {
       "skillName": "JavaScript",
-      "category": "Programming",
       "priority": 3,
       "difficulty": 3
     },
     {
       "skillName": "React",
-      "category": "Frameworks",
       "priority": 3,
       "difficulty": 4
     },
     {
       "skillName": "Jenkins",
-      "category": "DevOps",
       "priority": 1,
       "difficulty": 5
     }

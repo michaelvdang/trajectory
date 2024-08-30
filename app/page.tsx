@@ -1,12 +1,8 @@
-import AssetPicker from "@/components/AssetPicker";
-import Image from "next/image";
+import FileUploaderBox from "@/components/FileUpload";
+import Upload from "./upload/page";
 
 export default function Home() {
   return (
-    <div
-
-    >
-      <AssetPicker />
-    </div>
+    <Upload />
   );
 }
