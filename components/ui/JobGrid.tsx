@@ -30,4 +30,3 @@ export const JobGrid: React.FC = () => (
   </section>
 );
 
-

@@ -97,20 +97,20 @@ import { JobGrid } from '@/components/ui/JobGrid';
 
 export default function Home() {
     return (
-  <>
-  <div className="bg-black">
-  {/* Background rings */}
-  <div className="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_70%,transparent)]">
-      <div className="w-[620px] h-[620px] hero-ring"></div>
-      <div className="w-[820px] h-[820px] hero-ring"></div>
-      <div className="w-[1020px] h-[1020px] hero-ring"></div>
-      <div className="w-[1220px] h-[1220px] hero-ring"></div>
-    </div>
+        <>
+            <div className="relative min-h-screen bg-gradient-to-br from-slate-900 via-black to-slate-900 overflow-hidden">
+                {/* Background rings */}
+                <div className="absolute inset-0 z-0 flex items-center justify-center">
+                    <div className="w-[620px] h-[620px] border border-slate-700 rounded-full animate-pulse opacity-20"></div>
+                    <div className="w-[820px] h-[820px] border border-slate-700 rounded-full animate-pulse opacity-15"></div>
+                    <div className="w-[1020px] h-[1020px] border border-slate-700 rounded-full animate-pulse opacity-10"></div>
+                    <div className="w-[1220px] h-[1220px] border border-slate-700 rounded-full animate-pulse opacity-5"></div>
+                </div>
 
-    <JobGrid />
-    </div>
-  </>
-);
-};
+                <JobGrid />
+            </div>
+        </>
+    );
+}
 
 
