@@ -72,6 +72,7 @@ class Formatter():
                 {"role": "user", "content": text},
             ],
             response_format=ResumeFormat,
+            temperature=0.0,
         )
 
         # Extract and return the content of the response
