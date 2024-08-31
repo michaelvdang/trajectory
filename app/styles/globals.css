@@ -57,13 +57,36 @@
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
+  .nav-item {
+      @apply px-4 py-1.5 rounded-full text-white/70 text-sm font-semibold hover:bg-white/10 hover:text-white transition duration-300;
+  }
+
+  .hero-ring {
+      @apply absolute inset-0 border-2 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border-violet-300/15 shadow-[0_0_80px_inset] shadow-violet-300/15;
+  }
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+/* Custom hexagonal grid styling */
+.hex-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+  place-items: center;
+}
+
+.hex-grid > * {
+  margin-bottom: -50px; /* Overlap to create hexagonal illusion */
+}
+
+@media (min-width: 768px) {
+  .hex-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
