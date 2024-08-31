@@ -50,9 +50,11 @@ export async function POST (
     // store languages and skills in firestore
     const topMatches = parseResponse.data.topMatches;
 
-    // store userData in firestore
-    // get userData (languages, skills, experience, education, activities, projects, certifications) from parseResponse.data.userData and ask gpt to assign proficiency level to each job skill
-    // store proficiency level in firestore
+    // store userData and topMatches in firestore, to be retrieved in matches page
+
+    
+    // get userData (languages, skills, experience, education, activities, projects, certifications) from parseResponse.data.userData and ask gpt to assess proficiency level to each job skill
+    // store proficiency level in firestore under assessments collection, each skill is a doc with skill name
     // user selects job, get job skills required
     // on client: redirect to job/[jobId] page to display job skills and current skills, send userId to get skills proficiency level and contrast with job skills
     

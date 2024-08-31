@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import Profile from "@/components/Profile";
 import Match from "@/components/Match";
 import { useUser } from "@clerk/nextjs";
+import axios from "axios";
 
 interface UserData {
   languages: string[];
@@ -17,19 +18,31 @@ interface UserData {
 }
 
 interface MatchData {
+  id: string;
   title: string;
   skills: string[];
   score: number;
 }
 
 export default function Jobs() {
+  // query userData and topMatches from firestore
   const [userData, setUserData] = useState<UserData>(null);
   const [topMatches, setTopMatches] = useState<MatchData[]>([]);
+  const [targetJobMatches, setTargetJobMatches] = useState<MatchData[]>([]);
   const searchParams = useSearchParams();
   const { isLoaded, isSignedIn, user} = useUser();
   const [userId, setUserId] = useState<string>(null);
   // const userId = searchParams.get("userId");
   const fileName = searchParams.get("fileName");
+  const targetJob = searchParams.get("targetJob");
+
+  useEffect(() => {
+    if (targetJob) {
+      console.log('matches page targetJob: ', targetJob);
+      setTargetJobMatches(JSON.parse(localStorage.getItem('targetJobMatches')));
+      console.log("JSON.parse(localStorage.getItem('targetJobMatches')): ", JSON.parse(localStorage.getItem('targetJobMatches')));
+    }
+  }, [targetJob]);
 
   useEffect(() => {
     if (isLoaded && isSignedIn && user) {
@@ -37,12 +50,13 @@ export default function Jobs() {
     }
   }, [isLoaded, isSignedIn, user]);
 
-  useEffect(() => {
-    if (userId && fileName) {
-      handleSuccess(userId as string, fileName as string);
-    }
-  }, [userId, fileName]);
+  // useEffect(() => {
+  //   if (userId && fileName) {
+  //     handleSuccess(userId as string, fileName as string);
+  //   }
+  // }, [userId, fileName]);
 
+  // this function should be in upload to be called as soon as the file is uploaded
   const handleSuccess = async (userId: string, fileName: string) => {
     // send filePath (userId, fileName) to parseInit to download from s3
     const response = await fetch(`http://localhost:3000/api/parseInit`, {
@@ -53,10 +67,10 @@ export default function Jobs() {
       body: JSON.stringify({ userId, fileName }),
     });
     if (response.ok) {
-      console.log("success");
+      console.log("success fully parsed resume");
     }
     const data = await response.json();
-    console.log("data from response: ", data);
+    console.log("data from parse response: ", data);
     console.log(JSON.stringify(data));
 
     setTopMatches(data.topMatches);
@@ -85,7 +99,18 @@ export default function Jobs() {
         />
       )}
       <div className="mt-6">
-        <h2 className="text-2xl font-bold mb-4">Top Matches</h2>
+        <h2 className="text-2xl font-bold mb-4">Top Matches for {targetJob}</h2>
+        {targetJobMatches.map((job, index) => (
+          <Match
+            key={index}
+            title={job.title}
+            skills={job.skills}
+            score={job.score}
+          />
+        ))}
+      </div>
+      <div className="mt-6">
+        <h2 className="text-2xl font-bold mb-4">Top Matches for Your Resume</h2>
         {topMatches.map((match, index) => (
           <Match
             key={index}

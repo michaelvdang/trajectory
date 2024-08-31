@@ -49,6 +49,7 @@ const FileUpload = () => {
   // const userId = '123';
   const [fileName, setFileName] = useState<string>('');
   const router = useRouter();
+  const [targetJob, setTargetJob] = useState<string>('');
 
   const dropZoneConfig = {
     maxFiles: 1,
@@ -63,13 +64,59 @@ const FileUpload = () => {
   }, [isLoaded, isSignedIn, user]);
 
   useEffect(() => {
+    if (targetJob) {
+      // query pinecone for matching job titles
+      const handleSubmitTargetJob = async (targetJob: string) => {
+        try {
+          const response = await axios.post(
+            `/api/search`, 
+            { "message": JSON.stringify({targetJob}) }, 
+            { headers: { 'Content-Type': 'application/json' } }
+          )
+          console.log('getTargetJobMatches response: ', response.data.matches);
+          // store in local storage
+          const targetJobMatches = response.data.matches.map((match: any) => (
+            {
+              title: match.metadata.title,
+              skills: match.metadata.skills,
+              score: match.score,
+              id: match.id
+            }
+          ))
+          // save targetJob to firestore
+          // save targetJobMatches to firestore
+          
+          console.log('targetJobMatches: ', targetJobMatches);
+          localStorage.setItem('targetJobMatches', JSON.stringify(targetJobMatches));
+          router.push(`/users/${userId.slice(-10)}/matches?fileName=${fileName}&targetJob=${targetJob}`);
+          setUploadStatus('');
+          setFileName('');
+        }
+        catch (error) {
+          console.log('handleSubmitTargetJob error: ', error);
+        }
+      }
+      handleSubmitTargetJob(targetJob);
+    }
+  }, [targetJob]);
+
+  useEffect(() => {
     if (uploadStatus === 'successful') {
+      // start parsing the uploaded file and save parsed data to firestore
+      console.log("calling parseInit");
+      fetch(`http://localhost:3000/api/parseInit`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId, fileName }),
+      });
+      console.log("called parseInit");
+      
       // ask user to enter target jobs or navigate to /users/[userId]/matches
-      router.push(`/users/${userId.slice(-10)}/matches?fileName=${fileName}`);
-      setTimeout(() => {
-        setUploadStatus('');
-        setFileName('');
-      }, 3000);
+      // open targetJobDialog with handleSubmit(() => setTargetJob(value))
+      setTargetJob('devops engineer');
+
     }
   }, [uploadStatus]);
 
@@ -91,7 +138,8 @@ const FileUpload = () => {
 
     try {
       setUploadStatus('Uploading...');
-      const response = await axios.post(`/api/users/${userId}/upload`, formData, {
+      const response = await axios.post(`/api/upload`, formData, {
+      // const response = await axios.post(`/api/users/${userId}/upload`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -142,6 +190,7 @@ const FileUpload = () => {
       {uploadStatus && (
         <p className="mt-4 text-sm text-gray-500">{uploadStatus}</p>
       )}
+      {/* dialog to enter target job here */}
     </div>
   );
 };

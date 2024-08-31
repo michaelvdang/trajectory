@@ -20,8 +20,6 @@ const queryPinecone = async (embedding, topK = 3) => {
     includeMetadata: true
   });
 
-  console.log('queryResponse1: ', queryResponse1);
-  
   return queryResponse1
 }
 
