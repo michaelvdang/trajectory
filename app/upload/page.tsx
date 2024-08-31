@@ -11,7 +11,10 @@ import { Paperclip } from "lucide-react";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import { useUser } from "@clerk/nextjs";
+import { useAuth, useUser } from "@clerk/nextjs";
+import useFirebase from "@/hooks/useFirebase";
+import { auth } from "@/firebase";
+import { signInWithCustomToken } from "firebase/auth";
 
 const FileSvgDraw = () => {
   return (
@@ -40,7 +43,6 @@ const FileSvgDraw = () => {
   );
 };
 
-
 const FileUpload = () => {
   const [files, setFiles] = useState<File[] | null>(null);
   const [uploadStatus, setUploadStatus] = useState<string>("");
@@ -50,6 +52,7 @@ const FileUpload = () => {
   const [fileName, setFileName] = useState<string>('');
   const router = useRouter();
   const [targetJob, setTargetJob] = useState<string>('');
+  const hasFirebase = useFirebase();
 
   const dropZoneConfig = {
     maxFiles: 1,

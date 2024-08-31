@@ -5,10 +5,10 @@ import HeroSection from './components/HeroSection';
 
 const HomePage: React.FC = () => {
   return (
-    <FileUpload />
-    // <MainLayout>
-    //   <HeroSection />
-    // </MainLayout>
+    <MainLayout>
+      <HeroSection />
+      <FileUpload />
+    </MainLayout>
   );
 };
 

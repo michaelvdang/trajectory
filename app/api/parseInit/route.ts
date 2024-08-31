@@ -3,6 +3,7 @@ import uploadFilesS3 from "@/services/uploadFilesS3";
 import { GetObjectCommand, ListObjectsCommand, PutObjectCommand } from "@aws-sdk/client-s3";
 import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
+import admin from '@/firebaseAdmin';
 
 const Bucket = process.env.S3_BUCKET;
 
@@ -49,6 +50,7 @@ export async function POST (
 
     // store languages and skills in firestore
     const topMatches = parseResponse.data.topMatches;
+    admin
 
     // store userData and topMatches in firestore, to be retrieved in matches page
 
