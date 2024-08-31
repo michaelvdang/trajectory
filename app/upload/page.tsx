@@ -1,5 +1,6 @@
 "use client";
-
+import Image from "next/image";
+import Logo from "@/assets/images/TRAJECTORY__4_-removebg-preview.png";
 import { useEffect, useState } from "react";
 import {
   FileUploader,
@@ -168,43 +169,48 @@ const FileUpload = () => {
   };
 
   return (
-    <div className="relative flex flex-col justify-center items-center gap-6 bg-background rounded-lg p-12 md:p-24  w-1/2 border border-gray-300 max-w-xl md:max-w-3xl mx-auto">
-      <FileUploader
-        value={files}
-        onValueChange={setFiles}
-        dropzoneOptions={dropZoneConfig}
-      >
-        <FileInput className="outline-dashed outline-1 outline-white">
-          <div className="flex items-center justify-center flex-col pt-3 pb-4 w-full">
-            <FileSvgDraw />
-          </div>
-        </FileInput>
-        <FileUploaderContent>
-          {files &&
-            files.length > 0 &&
-            files.map((file, i) => (
-              <FileUploaderItem key={i} index={i}>
-                <Paperclip className="h-4 w-4 stroke-current" />
-                <span>{file.name}</span>
-              </FileUploaderItem>
-            ))}
-        </FileUploaderContent>
-      </FileUploader>
-      {files && files.length > 0 && (
-        <Button
-          className="mt-8 px-4 py-2 w-[25%] bg-blue-500 text-white rounded hover:bg-blue-600"
-          onClick={handleUpload}
-          disabled={!files || files.length === 0}
+    <div className="flex justify-center items-center min-h-screen">
+     
+      <div className="relative flex flex-col justify-center items-center gap-6 bg-background rounded-lg p-12 md:p-24 w-1/2 border border-gray-300 max-w-xl md:max-w-3xl mx-auto">
+      
+        <FileUploader
+          value={files}
+          onValueChange={setFiles}
+          dropzoneOptions={dropZoneConfig}
         >
-          Upload
-        </Button>
-      )}
-      {uploadStatus && (
-        <p className="mt-4 text-sm text-gray-500">{uploadStatus}</p>
-      )}
-      {/* dialog to enter target job here */}
+          <FileInput className="outline-dashed outline-1 outline-white">
+            <div className="flex items-center justify-center flex-col pt-3 pb-4 w-full">
+              <FileSvgDraw />
+            </div>
+          </FileInput>
+          <FileUploaderContent>
+            {files &&
+              files.length > 0 &&
+              files.map((file, i) => (
+                <FileUploaderItem key={i} index={i}>
+                  <Paperclip className="h-4 w-4 stroke-current" />
+                  <span>{file.name}</span>
+                </FileUploaderItem>
+              ))}
+          </FileUploaderContent>
+        </FileUploader>
+        {files && files.length > 0 && (
+          <Button
+            className="mt-8 px-4 py-2 w-[25%] bg-blue-500 text-white rounded hover:bg-blue-600"
+            onClick={handleUpload}
+            disabled={!files || files.length === 0}
+          >
+            Upload
+          </Button>
+        )}
+        {uploadStatus && (
+          <p className="mt-4 text-sm text-gray-500">{uploadStatus}</p>
+        )}
+        {/* dialog to enter target job here */}
+      </div>
     </div>
   );
+  
 };
 
 export default FileUpload;
