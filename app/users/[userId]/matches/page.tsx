@@ -50,11 +50,11 @@ export default function Jobs() {
     }
   }, [isLoaded, isSignedIn, user]);
 
-  // useEffect(() => {
-  //   if (userId && fileName) {
-  //     handleSuccess(userId as string, fileName as string);
-  //   }
-  // }, [userId, fileName]);
+  useEffect(() => {
+    if (userId && fileName) {
+      handleSuccess(userId as string, fileName as string);
+    }
+  }, [userId, fileName]);
 
   // this function should be in upload to be called as soon as the file is uploaded
   const handleSuccess = async (userId: string, fileName: string) => {
