@@ -1,5 +1,5 @@
 import React from 'react';
-import { JobCard } from '@/components/JobCard';
+import { JobCard } from '@/components/ui/JobCard';
 
 export const jobData = [
   { jobTitle: 'Software Engineer', jobDescription: 'Develop and maintain web applications.', timeline: '1-2 years', salary: '$80,000', difficulty: 'Medium' },
