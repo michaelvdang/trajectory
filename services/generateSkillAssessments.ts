@@ -25,27 +25,13 @@ async function generateSkillAssessments(userData, jobSkills)
         `,
       },
       { role: "user", content: JSON.stringify({ userData, jobSkills }) },
-      // { role: "assistant", content: 'respond only in json without markers' },
-      // { role: "user", content: 'hello'}
     ],
   });
   const content = completion.choices[0].message.content;
   const assessments = JSON.parse(content);
 
   return assessments;
-
-  
-  // return completion.choices[0].message.content;
 }
 
 export default generateSkillAssessments
-
-
-// // dev
-// import data from './topMatchesAndUserData.json' with { type: 'json' };
-// const userData = data.userData;
-// const jobSkills = data.jobSkills;
-
-// const assessments = await generateSkillAssessments(userData, jobSkills)
-// console.log('assessments: ', assessments);
 
