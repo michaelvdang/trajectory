@@ -77,7 +77,7 @@ export default function Jobs() {
     setUserData(data.userData);
   };
 
-  if (!userData || topMatches.length === 0) {
+  if (targetJobMatches.length === 0 && !userData && topMatches.length === 0) {
     return (
       <div className="flex items-center justify-center h-screen">
         <div className="text-2xl font-bold">Loading...</div>

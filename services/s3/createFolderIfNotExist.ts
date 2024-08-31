@@ -1,4 +1,4 @@
-import s3 from "../s3";
+import s3 from "./s3";
 import { HeadObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";
 
 async function createFolder(Bucket: string, Key: string) {

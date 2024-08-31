@@ -13,11 +13,9 @@ export async function POST(request) {
     const data = await request.json()
 
     const input = JSON.parse(data.message);
-    console.log('api/search input: ', input);
     
     // get embedding
     const embedding = await generateEmbeddings(JSON.stringify(input));
-    console.log('embedding: ', embedding);
 
     // query pinecone for similar jobs
     const queryResults = await queryPinecone(embedding.data[0].embedding);

@@ -1,6 +1,6 @@
-import s3 from "@/services/s3";
+import s3 from "@/services/s3/s3";
 import { createFolderIfNotExist } from "@/services/s3/createFolderIfNotExist";
-import uploadFilesS3 from "@/services/uploadFilesS3";
+import uploadFilesS3 from "@/services/s3/uploadFilesS3";
 import { GetObjectCommand, ListObjectsCommand, PutObjectCommand } from "@aws-sdk/client-s3";
 import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";

@@ -1,6 +1,6 @@
-import s3 from "@/services/s3";
+import s3 from "@/services/s3/s3";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
-import { createFolderIfNotExist } from "./s3/createFolderIfNotExist";
+import { createFolderIfNotExist } from "./createFolderIfNotExist";
 
 const uploadFilesS3 = async (directory: string, fileName: string, files: File[]) => {
   try {
@@ -27,7 +27,6 @@ const uploadFilesS3 = async (directory: string, fileName: string, files: File[])
       })
     );
 
-    console.log('responses', responses);
     return responses;
   }
   catch (error) {

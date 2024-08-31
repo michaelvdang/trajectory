@@ -13,8 +13,9 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useAuth, useUser } from "@clerk/nextjs";
 import useFirebase from "@/hooks/useFirebase";
-import { auth } from "@/firebase";
+import { auth, db } from "@/firebase";
 import { signInWithCustomToken } from "firebase/auth";
+import { doc, getDoc, setDoc, writeBatch } from "firebase/firestore";
 
 const FileSvgDraw = () => {
   return (
@@ -68,15 +69,19 @@ const FileUpload = () => {
 
   useEffect(() => {
     if (targetJob) {
+      // this function should be outside useEffect and attached to onSubmit for the targetJobDialog
       // query pinecone for matching job titles
       const handleSubmitTargetJob = async (targetJob: string) => {
+        if (targetJob.length === 0) {
+          alert('Please enter a job title');
+          return;
+        }
         try {
           const response = await axios.post(
             `/api/search`, 
             { "message": JSON.stringify({targetJob}) }, 
             { headers: { 'Content-Type': 'application/json' } }
           )
-          console.log('getTargetJobMatches response: ', response.data.matches);
           // store in local storage
           const targetJobMatches = response.data.matches.map((match: any) => (
             {
@@ -86,14 +91,19 @@ const FileUpload = () => {
               id: match.id
             }
           ))
-          // save targetJob to firestore
-          // save targetJobMatches to firestore
-          
-          console.log('targetJobMatches: ', targetJobMatches);
           localStorage.setItem('targetJobMatches', JSON.stringify(targetJobMatches));
-          router.push(`/users/${userId.slice(-10)}/matches?fileName=${fileName}&targetJob=${targetJob}`);
+
+          console.log("store in firestore")
+          // save targetJob to firestore and targetJobMatches to firestore
+          const userDocRef = doc(db, 'users', userId);
+          // await setDoc(userDocRef, {targetJob, targetJobMatches}, { merge: true });
+          const batch = writeBatch(db)
+          batch.set(userDocRef, {targetJob, targetJobMatches}, { merge: true });
+          await batch.commit();
+
           setUploadStatus('');
           setFileName('');
+          router.push(`/users/${userId.slice(-10)}/matches?fileName=${fileName}&targetJob=${targetJob}`);
         }
         catch (error) {
           console.log('handleSubmitTargetJob error: ', error);
@@ -105,7 +115,7 @@ const FileUpload = () => {
 
   useEffect(() => {
     if (uploadStatus === 'successful') {
-      // start parsing the uploaded file and save parsed data to firestore
+      // // start parsing the uploaded file and save parsed data to firestore
       console.log("calling parseInit");
       fetch(`http://localhost:3000/api/parseInit`, {
         method: "POST",
@@ -142,7 +152,6 @@ const FileUpload = () => {
     try {
       setUploadStatus('Uploading...');
       const response = await axios.post(`/api/upload`, formData, {
-      // const response = await axios.post(`/api/users/${userId}/upload`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

@@ -47,3 +47,4 @@ __pycache__/
 ## test file assets
 *.pdf
 resume_json.json
+topMatchesAndUserData.json

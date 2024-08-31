@@ -49,33 +49,40 @@ async def get_image(file: UploadFile = File(...),
     #     'certifications': resume_text.certifications,
     # }
 
-    ## use hard coded json (similar to parsed json)
-    resume_json = json.load(open("resume_json.json"))
+    # ## use hard coded json (similar to parsed json)
+    # resume_json = json.load(open("resume_json.json"))
+    # print('resume_json: ', resume_json)
+    
+    # # send to nextjs api to get job results
+    # print('sending to nextjs api')
+    # response = requests.post('http://localhost:3000/api/search', json={'message': json.dumps({
+    #     'skills': resume_json['skills'],
+    #     'languages': resume_json['languages'],
+    #     'experiences': resume_json['experiences'],
+    #     'projects': resume_json['projects'],
+    #     'certifications': resume_json['certifications'],
+    # })})
+    # data = response.json()
+    # print('matching job titles: ', [d['id'] for d in data['matches']])
+    
+    # topMatches= []
+    # matches = data['matches']
+    # for match in matches:
+    #    topMatches.append(
+    #        {
+    #            'id': match['id'],
+    #            'title': match['metadata']['title'],
+    #            'skills': match['metadata']['skills'],
+    #            'score': match['score']
+    #        }
+    #    )
+
+    # use fake data
+    fake_data = json.load(open("topMatchesAndUserData.json"))
+    topMatches = fake_data['topMatches']
+    resume_json = fake_data['userData']
+    print('topMatches: ', topMatches)
     print('resume_json: ', resume_json)
-    
-    # send to nextjs api to get job results
-    print('sending to nextjs api')
-    response = requests.post('http://localhost:3000/api/search', json={'message': json.dumps({
-        'skills': resume_json['skills'],
-        'languages': resume_json['languages'],
-        'experiences': resume_json['experiences'],
-        'projects': resume_json['projects'],
-        'certifications': resume_json['certifications'],
-    })})
-    data = response.json()
-    print('matching job titles: ', [d['id'] for d in data['matches']])
-    
-    topMatches= []
-    matches = data['matches']
-    for match in matches:
-       topMatches.append(
-           {
-               'id': match['id'],
-               'title': match['metadata']['title'],
-               'skills': match['metadata']['skills'],
-               'score': match['score']
-           }
-       )
 
     return {
         'topMatches': topMatches,
