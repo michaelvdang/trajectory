@@ -1,3 +1,6 @@
+'use client';
+
+import Image from 'next/image';
 import ArrowRight from '@/assets/icons/arrow-right.svg';
 
 
@@ -15,7 +18,13 @@ export const CallToAction = () => {
           <button className="inline-flex items-center gap-2 border border-white bg-white text-gray-900 h-12 px-6 rounded-xl hover:bg-violet-100/30 hover:border-violet-100 hover:text-gray-600">Get Started Now!</button>
           <button className="inline-flex items-center gap-2 border border-white/15 px-6 h-12 rounded-xl">
             <span>Learn more</span>
-            <ArrowRight className="h-5 w-5" />
+            <Image 
+                  src={ArrowRight}
+                  alt="Arrow Right"
+                  width={16}
+                  height={16}
+                  className="size-4"
+                />
             </button>
         </div>
       </div>
