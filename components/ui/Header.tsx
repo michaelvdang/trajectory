@@ -24,7 +24,7 @@ export const Header = () => {
           About
         </Link>
         <SignedOut>
-          <SignInButton cclassName="nav-item bg-white text-gray-900 hover:bg-violet-500/30 hover:text-gray-600" />
+          <SignInButton />
         </SignedOut>
         <SignedIn>
         <Link
