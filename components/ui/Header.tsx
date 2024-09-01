@@ -24,18 +24,19 @@ export const Header = () => {
           About
         </Link>
         <SignedOut>
-          <SignInButton cclassName="nav-item bg-white text-gray-900 hover:bg-violet-500/30 hover:text-gray-600" />
+          <div className="nav-item bg-white text-gray-900 hover:bg-violet-500/30 hover:text-gray-600">
+            <SignInButton />
+          </div>
         </SignedOut>
         <SignedIn>
-        <Link
-          href="/Main"
-          className="nav-item bg-white text-gray-900 hover:bg-violet-500/30 hover:text-gray-600"
-        >
-          Get Started
-        </Link>
-        <UserButton />
+          <Link
+            href="/Main"
+            className="nav-item bg-white text-gray-900 hover:bg-violet-500/30 hover:text-gray-600"
+          >
+            Get Started
+          </Link>
+          <UserButton />
         </SignedIn>
-
       </nav>
     </div>
   );
