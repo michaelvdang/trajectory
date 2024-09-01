@@ -1,4 +1,16 @@
-1. a way to mark completed skills from user's resume against the required skills from target job title
-2. render this data on the UI
-3. get data, embed and store in pinecone
-4. setup firestore with data for users, job positions, skills
+
+
+TODOs:
+- complete the jobs/[jobTitle] page to display job requirements
+- fix the routing for Header to point to correct page
+
+- find a way to mark completed skills from user's resume against the required skills from target job title
+- get data, embed and store in pinecone
+
+
+
+
+
+
+COMPLETED:
+- setup firestore with data for users, job positions, skills
