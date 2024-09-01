@@ -6,7 +6,7 @@ import uvicorn
 from pypdf import PdfReader
 import requests 
 import json 
-from utils.Formatter import Formatter
+from utils.Formatter import Formatter, ResumeFormat
 from utils.TextCleaner import TextCleaner
 import os
 
@@ -98,7 +98,18 @@ def parse_resume(file_path):
     # Clean the extracted text
     cleaner = TextCleaner()
     cleaned_text = cleaner.clean_text(text)
-    # print(cleaned_text)
+
+    # If the text is empty, return an empty ResumeFormat object
+    if not cleaned_text:
+        return ResumeFormat(
+            languages=[],
+            skills=[],
+            experiences=[],
+            education=[],
+            activities=[],
+            projects=[],
+            certifications=[],
+        )
 
     formatter = Formatter()
     formatted_text = formatter.format(cleaned_text)
