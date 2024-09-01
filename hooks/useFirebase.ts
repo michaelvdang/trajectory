@@ -9,14 +9,19 @@ export default function useFirebase() {
   const [hasFirebaseUser, setHasFirebaseUser] = useState(false)
   
   useEffect(() => {
-    if (isLoaded && !isSignedIn) return
     const signIn = async () => {
       const token = await getToken({ template: 'integration_firebase' })
-  
+      
       const userCredentials = await signInWithCustomToken(auth, token || '')
       setHasFirebaseUser(true)
     }
-    signIn()
+    if (isLoaded && isSignedIn) {
+      signIn()
+      setHasFirebaseUser(true)
+    }
+    else {
+      setHasFirebaseUser(false)
+    }
   }, [isLoaded, isSignedIn, user])
 
   return hasFirebaseUser;

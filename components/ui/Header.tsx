@@ -27,6 +27,7 @@ export const Header = () => {
           <div className="nav-item bg-white text-gray-900 hover:bg-violet-500/30 hover:text-gray-600">
             <SignInButton />
           </div>
+          <SignInButton />
         </SignedOut>
         <SignedIn>
           <Link

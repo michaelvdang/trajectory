@@ -12,10 +12,11 @@ export const jobData = [
 ];
 
 export const JobGrid: React.FC = () => (
-  <section className="bg-gradient-to-br from-slate-50 via-violet-300 to-slate-50 p-4 relative overflow-hidden px-2">
-  
+  <section 
+    // className="bg-gradient-to-br from-slate-50 via-violet-300 to-slate-50 p-4 relative overflow-hidden px-2"
+  >
     {/* Job cards grid */}
-    <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 py-20">
+    <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 py-20 ">
       {jobData.map((job, index) => (
         <JobCard
           key={index}

@@ -72,6 +72,7 @@ const FileUpload = () => {
       // this function should be outside useEffect and attached to onSubmit for the targetJobDialog
       // query pinecone for matching job titles
       const handleSubmitTargetJob = async (targetJob: string) => {
+        localStorage.setItem('targetJob', targetJob);
         if (targetJob.length === 0) {
           alert('Please enter a job title');
           return;

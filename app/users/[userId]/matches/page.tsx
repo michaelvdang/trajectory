@@ -1,11 +1,16 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Profile from "@/components/Profile";
 import Match from "@/components/Match";
 import { useUser } from "@clerk/nextjs";
 import axios from "axios";
+import { JobGrid } from "@/components/ui/JobGrid";
+import { JobCard } from "@/components/ui/JobCard";
+import { db } from "@/firebase";
+import { doc, onSnapshot } from "firebase/firestore";
+
 
 interface UserData {
   languages: string[];
@@ -25,65 +30,115 @@ interface MatchData {
 }
 
 export default function Jobs() {
-  // query userData and topMatches from firestore
   const [userData, setUserData] = useState<UserData>(null);
   const [topMatches, setTopMatches] = useState<MatchData[]>([]);
   const [targetJobMatches, setTargetJobMatches] = useState<MatchData[]>([]);
+  const [targetJob, setTargetJob] = useState<string>(null);
   const searchParams = useSearchParams();
-  const { isLoaded, isSignedIn, user} = useUser();
-  const [userId, setUserId] = useState<string>(null);
-  // const userId = searchParams.get("userId");
+  const { isLoaded, isSignedIn, user } = useUser();
   const fileName = searchParams.get("fileName");
-  const targetJob = searchParams.get("targetJob");
 
   useEffect(() => {
-    if (targetJob) {
-      console.log('matches page targetJob: ', targetJob);
-      setTargetJobMatches(JSON.parse(localStorage.getItem('targetJobMatches')));
-      console.log("JSON.parse(localStorage.getItem('targetJobMatches')): ", JSON.parse(localStorage.getItem('targetJobMatches')));
-    }
-  }, [targetJob]);
+    setTargetJob(localStorage.getItem('targetJob'));
+  }, []);
 
   useEffect(() => {
-    if (isLoaded && isSignedIn && user) {
-      setUserId(user.id);
+    if (isLoaded && isSignedIn) {
+      const userDocRef = doc(db, 'users', user.id);
+      const unsubscribe = onSnapshot(userDocRef, (doc) => {
+        if (doc.exists()) {
+          const data = doc.data();
+          setUserData(data.userData);
+          setTopMatches(data.topMatches);
+          console.log('onsnapshot userData: ', data.userData);
+          console.log('onsnapshot topMatches: ', data.topMatches);
+        }
+      });
+      return () => unsubscribe();
     }
   }, [isLoaded, isSignedIn, user]);
-
+  
   useEffect(() => {
-    if (userId && fileName) {
-      handleSuccess(userId as string, fileName as string);
+    if (targetJob) {
+      setTargetJobMatches(JSON.parse(localStorage.getItem('targetJobMatches')));
     }
-  }, [userId, fileName]);
-
-  // this function should be in upload to be called as soon as the file is uploaded
-  const handleSuccess = async (userId: string, fileName: string) => {
-    // send filePath (userId, fileName) to parseInit to download from s3
-    const response = await fetch(`http://localhost:3000/api/parseInit`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ userId, fileName }),
-    });
-    if (response.ok) {
-      console.log("success fully parsed resume");
-    }
-    const data = await response.json();
-    console.log("data from parse response: ", data);
-    console.log(JSON.stringify(data));
-
-    setTopMatches(data.topMatches);
-    setUserData(data.userData);
-  };
-
-  if (targetJobMatches.length === 0 && !userData && topMatches.length === 0) {
+  }, [targetJob]);
+  
+  const Loading = () => {
     return (
       <div className="flex items-center justify-center h-screen">
         <div className="text-2xl font-bold">Loading...</div>
       </div>
     );
+  };
+
+  if (targetJobMatches.length === 0 && !userData && topMatches.length === 0) {
+    return (
+      <Loading />
+    );
   }
+
+  return (
+  <div className="flex flex-col items-center pt-16">
+  {/* Background rings */}
+    <div className="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_70%,transparent)]">
+      <div className="w-[620px] h-[620px] hero-ring"></div>
+      <div className="w-[820px] h-[820px] hero-ring"></div>
+      <div className="w-[1020px] h-[1020px] hero-ring"></div>
+      <div className="w-[1220px] h-[1220px] hero-ring"></div>
+    </div>
+    <div className="max-w-7xl w-full flex flex-col md:flex-row justify-center relative gap-x-12">
+      <div className="w-full md:w-1/2 mt-6 flex flex-col ">
+        <h2 className="text-2xl font-bold mb-4 text-center">Top matches for {targetJob}</h2>
+        <div
+          className="w-full flex flex-col justify-center items-center gap-y-4"
+        >
+          {targetJobMatches.length === 0 ? (
+            <Loading />
+          ) : (
+            targetJobMatches.map((job, index) => (
+              <JobCard
+                key={index}
+                jobTitle={job.title}
+                jobDescription={"No description available"}
+                timeline={"No timeline available"}
+                salary={"No salary available"}
+                difficulty={"No difficulty available"}
+                // skills={job.skills}
+                // score={job.score}
+              />
+            ))
+          )}
+        </div>
+      </div>
+      <div className="w-full md:w-1/2 mt-6 flex flex-col ">
+        <h2 className="text-2xl font-bold mb-4 text-center">Top matches for your resume</h2>
+        <div
+          className="w-full flex flex-col justify-center items-center gap-y-4"
+        >
+          {topMatches.length === 0 ? (
+            <Loading />
+          ) : (
+            topMatches.map((job, index) => (
+              <JobCard
+                key={index}
+                jobTitle={job.title}
+                jobDescription={"No description available"}
+                timeline={"No timeline available"}
+                salary={"No salary available"}
+                difficulty={"No difficulty available"}
+                // skills={job.skills}
+                // score={job.score}
+              />
+            ))
+          )}
+        </div>
+      </div>
+    </div>
+
+    {/* <JobGrid /> */}
+  </div>
+  )
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg">
