@@ -19,7 +19,7 @@ export const Header = () => {
         </Link>
         <SignedOut>
           <Link
-            href="/join-waitlist"
+            href="/waitlist/join"
             className="nav-item text-violet-900 hover:text-gray-600"
           >
             Join Waitlist

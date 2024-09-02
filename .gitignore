@@ -28,6 +28,7 @@ yarn-error.log*
 # local env files
 .env*.local
 .env
+trajectory-a7478-firebase-adminsdk-zmzu9-dc5ce3e841.json
 
 # vercel
 .vercel
@@ -48,3 +49,5 @@ __pycache__/
 *.pdf
 resume_json.json
 topMatchesAndUserData.json
+app/test/page.tsx
+trajectory-a7478-firebase-adminsdk-zmzu9-dc5ce3e841.json

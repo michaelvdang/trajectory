@@ -4,30 +4,14 @@ import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Profile from "@/components/Profile";
 import Match from "@/components/Match";
-import { useUser } from "@clerk/nextjs";
+import { RedirectToSignIn, useUser } from "@clerk/nextjs";
 import axios from "axios";
 import { JobGrid } from "@/components/ui/JobGrid";
 import { JobCard } from "@/components/ui/JobCard";
 import { db } from "@/firebase";
 import { doc, onSnapshot } from "firebase/firestore";
-
-
-interface UserData {
-  languages: string[];
-  skills: string[];
-  experience: string[];
-  education: string[];
-  activities: string[];
-  projects: string[];
-  certifications: string[];
-}
-
-interface MatchData {
-  id: string;
-  title: string;
-  skills: string[];
-  score: number;
-}
+import { Header } from "@/components/ui/Header";
+import { MatchData, UserData } from "@/types";
 
 export default function Jobs() {
   const [userData, setUserData] = useState<UserData>(null);
@@ -50,8 +34,6 @@ export default function Jobs() {
           const data = doc.data();
           setUserData(data.userData);
           setTopMatches(data.topMatches);
-          console.log('onsnapshot userData: ', data.userData);
-          console.log('onsnapshot topMatches: ', data.topMatches);
         }
       });
       return () => unsubscribe();
@@ -63,6 +45,12 @@ export default function Jobs() {
       setTargetJobMatches(JSON.parse(localStorage.getItem('targetJobMatches')));
     }
   }, [targetJob]);
+
+  useEffect(() => {
+    if (topMatches && topMatches.length > 0) {
+      localStorage.setItem('topMatches', JSON.stringify(topMatches));
+    }
+  }, [topMatches]);
   
   const Loading = () => {
     return (
@@ -78,7 +66,15 @@ export default function Jobs() {
     );
   }
 
+  if (isLoaded && !isSignedIn) {
+    return (
+      <RedirectToSignIn redirectUrl="/users/1/matches"/>
+    );
+  }
+
   return (
+    <>
+    <Header />
   <div className="flex flex-col items-center pt-16">
   {/* Background rings */}
     <div className="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_70%,transparent)]">
@@ -99,6 +95,7 @@ export default function Jobs() {
             targetJobMatches.map((job, index) => (
               <JobCard
                 key={index}
+                jobId={job.id}
                 jobTitle={job.title}
                 jobDescription={"No description available"}
                 timeline={"No timeline available"}
@@ -120,6 +117,7 @@ export default function Jobs() {
             topMatches.map((job, index) => (
               <JobCard
                 key={index}
+                jobId={job.id}
                 jobTitle={job.title}
                 jobDescription={"No description available"}
                 timeline={"No timeline available"}
@@ -138,43 +136,6 @@ export default function Jobs() {
 
     {/* <JobGrid /> */}
   </div>
+  </>
   )
-
-  return (
-    <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg">
-      {userData && (
-        <Profile
-          languages={userData.languages}
-          skills={userData.skills}
-          experience={userData.experience}
-          education={userData.education}
-          activities={userData.activities}
-          projects={userData.projects}
-          certifications={userData.certifications}
-        />
-      )}
-      <div className="mt-6">
-        <h2 className="text-2xl font-bold mb-4">Top Matches for {targetJob}</h2>
-        {targetJobMatches.map((job, index) => (
-          <Match
-            key={index}
-            title={job.title}
-            skills={job.skills}
-            score={job.score}
-          />
-        ))}
-      </div>
-      <div className="mt-6">
-        <h2 className="text-2xl font-bold mb-4">Top Matches for Your Resume</h2>
-        {topMatches.map((match, index) => (
-          <Match
-            key={index}
-            title={match.title}
-            skills={match.skills}
-            score={match.score}
-          />
-        ))}
-      </div>
-    </div>
-  );
 }

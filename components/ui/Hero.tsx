@@ -59,7 +59,7 @@ export const Hero = () => {
               </button>
 
               <Link
-                href="/sign-in"
+                href="/waitlist/join"
                 className={buttonVariants({ variant: 'default' })}
               >
                 Join Waitlist

@@ -14,3 +14,9 @@ export interface MatchData {
   skills: string[];
   score: number;
 }
+
+export interface JobData {
+  id: string;
+  title: string;
+  skills: string[];
+}

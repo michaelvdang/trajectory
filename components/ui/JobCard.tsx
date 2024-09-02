@@ -3,6 +3,7 @@ import React from 'react';
 import Link from 'next/link'; // Make sure to import Link from 'next/link' or your routing library
 
 type JobCardProps = {
+  jobId: string;
   jobTitle: string;
   jobDescription: string;
   timeline: string;
@@ -11,6 +12,7 @@ type JobCardProps = {
 };
 
 export const JobCard: React.FC<JobCardProps> = ({
+  jobId,
   jobTitle,
   jobDescription,
   timeline,
@@ -19,7 +21,7 @@ export const JobCard: React.FC<JobCardProps> = ({
 }) => {
 
   return (
-    <Link href={`/jobs/${jobTitle}`} className="w-full">
+    <Link href={`/jobs/${jobId}`} className="w-full">
     <div
       className="cursor-pointer border border-gray-300 rounded-lg py-3 px-5 w-full bg-gray-100 shadow-md hover:shadow-lg transition-shadow duration-300"
     >
