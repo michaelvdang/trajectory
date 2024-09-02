@@ -49,7 +49,6 @@ export const Header = () => {
           </Link>
           <UserButton />
         </SignedIn>
-
       </nav>
     </div>
   );
