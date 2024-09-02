@@ -4,8 +4,13 @@ import Image from 'next/image';
 import ArrowDownIcon from '@/assets/icons/arrow-down.svg';
 import ballImage from '@/assets/images/ball.png';
 import textLogo from '@/assets/images/TRAJECTORY__4_-removebg-preview.png';
+import { useRouter } from 'next/navigation';
+import { buttonVariants } from './button';
+import Link from 'next/link';
 
 export const Hero = () => {
+  const router = useRouter();
+  
   return (
     <div className="py-96 md:py-96 lg:py-96 relative z-0 overflow-x-clip">
       <div className="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_70%,transparent)]">
@@ -53,9 +58,16 @@ export const Hero = () => {
                 />
               </button>
 
-              <button className="inline-flex items-center gap-2 border border-white bg-white text-gray-900 h-12 px-6 rounded-xl hover:bg-violet-500/30 hover:text-gray-600">
-                <span className="font-semibold">Get Started</span>
-              </button>
+              <Link
+                href="/sign-in"
+                className={buttonVariants({ variant: 'default' })}
+              >
+                Join Waitlist
+              </Link>
+
+              {/* <button onClick={() => router.push('/sign-in')} className="inline-flex items-center gap-2 border border-white bg-white text-gray-900 h-12 px-6 rounded-xl hover:bg-violet-500/30 hover:text-gray-600">
+                <span className="font-semibold">Join Waitlist</span>
+              </button> */}
             </div>
           </div>
         </div>

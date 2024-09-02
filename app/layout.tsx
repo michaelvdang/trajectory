@@ -21,7 +21,7 @@ export default function RootLayout({
     <ClerkProvider>
     <html lang="en">
       <body className={clsx(dmSans.className, "antialiased")}>
-        <Header />
+        {/* <Header /> */}
       {children}
       </body>
     </html>
