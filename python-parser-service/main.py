@@ -72,7 +72,11 @@ async def get_image(file: UploadFile = File(...),
            {
                'id': match['id'],
                'title': match['metadata']['title'],
-               'skills': match['metadata']['skills'],
+               'description': match['metadata']['description'],
+               'preferences': match['metadata']['preferences'],
+               'requirements': match['metadata']['requirements'],
+               'skills': match['metadata']['skills_needed'],
+
                'score': match['score']
            }
        )
