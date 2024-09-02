@@ -1,4 +1,3 @@
-import FileUpload from "./upload/page";
 import React from 'react';
 import MainLayout from './layouts/MainLayout';
 import HeroSection from './components/HeroSection';
@@ -18,8 +17,6 @@ export default function Home() {
     <FAQs />
     <CallToAction />
     <Footer />
-
-      <FileUpload />
     </>
   );
 };

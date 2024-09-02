@@ -12,23 +12,29 @@ export const Header = () => {
           Home
         </Link>
         <Link
-          href="/JobDashboard"
-          className="nav-item text-violet-900 hover:text-gray-600"
-        >
-          Developers
-        </Link>
-        <Link
           href="/about"
           className="nav-item text-violet-900 hover:text-gray-600"
         >
           About
         </Link>
         <SignedOut>
+        <Link
+          href="/about"
+          className="nav-item text-violet-900 hover:text-gray-600"
+        >
           <SignInButton />
+          {/* About */}
+        </Link>
         </SignedOut>
         <SignedIn>
         <Link
-          href="/Main"
+          href="/JobDashboard"
+          className="nav-item text-violet-900 hover:text-gray-600"
+        >
+          Dashboard
+        </Link>
+        <Link
+          href="/get-started/upload"
           className="nav-item bg-white text-gray-900 hover:bg-violet-500/30 hover:text-gray-600"
         >
           Get Started

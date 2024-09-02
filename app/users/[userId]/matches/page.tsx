@@ -87,11 +87,11 @@ export default function Jobs() {
       <div className="w-[1020px] h-[1020px] hero-ring"></div>
       <div className="w-[1220px] h-[1220px] hero-ring"></div>
     </div>
-    <div className="max-w-7xl w-full flex flex-col md:flex-row justify-center relative gap-x-12">
-      <div className="w-full md:w-1/2 mt-6 flex flex-col ">
-        <h2 className="text-2xl font-bold mb-4 text-center">Top matches for {targetJob}</h2>
+    <div className="max-w-7xl w-full flex flex-col md:flex-row  relative gap-x-12 px-4">
+      <div className="w-full mt-6 flex flex-col ">
+        <h2 className="text-xl font-bold mb-4 text-center">Top matches for {targetJob}</h2>
         <div
-          className="w-full flex flex-col justify-center items-center gap-y-4"
+          className="w-full flex flex-col gap-y-4"
         >
           {targetJobMatches.length === 0 ? (
             <Loading />
@@ -111,14 +111,12 @@ export default function Jobs() {
           )}
         </div>
       </div>
-      <div className="w-full md:w-1/2 mt-6 flex flex-col ">
-        <h2 className="text-2xl font-bold mb-4 text-center">Top matches for your resume</h2>
+      <div className="w-full mt-6 flex flex-col ">
+        <h2 className="text-xl font-bold mb-4 text-center">Top matches for your resume</h2>
         <div
-          className="w-full flex flex-col justify-center items-center gap-y-4"
+          className="w-full flex flex-col gap-y-4"
         >
-          {topMatches.length === 0 ? (
-            <Loading />
-          ) : (
+          {topMatches && topMatches.length > 0 ? (
             topMatches.map((job, index) => (
               <JobCard
                 key={index}
@@ -131,6 +129,8 @@ export default function Jobs() {
                 // score={job.score}
               />
             ))
+          ) : (
+            <Loading />
           )}
         </div>
       </div>
