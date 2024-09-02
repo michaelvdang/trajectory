@@ -1,5 +1,4 @@
 import admin from "firebase-admin";
-import serviceAccount from "./trajectory-a7478-firebase-adminsdk-zmzu9-dc5ce3e841.json" with { type: "json" };
 
 if (!admin.apps.length) {
   admin.initializeApp({
