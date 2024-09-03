@@ -70,56 +70,56 @@ const FileUpload = () => {
     }
   }, [isLoaded, isSignedIn, user]);
 
-  useEffect(() => {
-    if (targetJob) {
-      // this function should be outside useEffect and attached to onSubmit for the targetJobDialog
-      // query pinecone for matching job titles
-      const handleSubmitTargetJob = async (targetJob: string) => {
-        localStorage.setItem('targetJob', targetJob);
-        if (targetJob.length === 0) {
-          alert('Please enter a job title');
-          return;
-        }
-        try {
-          const response = await axios.post(
-            `/api/search`, 
-            { "message": JSON.stringify({targetJob}) }, 
-            { headers: { 'Content-Type': 'application/json' } }
-          )
-          // store in local storage
-          const targetJobMatches: MatchData[] = response.data.matches.map((match: any) => (
-            {
-              title: match.metadata.title,
-              skills: match.metadata.skills,
-              score: match.score,
-              id: match.id,
-              description: match.metadata.description,
-              timeline: match.metadata.timeline,
-              salary: match.metadata.salary,
-              location: match.metadata.location,
-            }
-          ))
-          localStorage.setItem('targetJobMatches', JSON.stringify(targetJobMatches));
+  // useEffect(() => {
+  //   if (targetJob) {
+  //     // this function should be outside useEffect and attached to onSubmit for the targetJobDialog
+  //     // query pinecone for matching job titles
+  //     const handleSubmitTargetJob = async (targetJob: string) => {
+  //       localStorage.setItem('targetJob', targetJob);
+  //       if (targetJob.length === 0) {
+  //         alert('Please enter a job title');
+  //         return;
+  //       }
+  //       try {
+  //         const response = await axios.post(
+  //           `/api/search`, 
+  //           { "message": JSON.stringify({targetJob}) }, 
+  //           { headers: { 'Content-Type': 'application/json' } }
+  //         )
+  //         // store in local storage
+  //         const targetJobMatches: MatchData[] = response.data.matches.map((match: any) => (
+  //           {
+  //             title: match.metadata.title,
+  //             skills: match.metadata.skills,
+  //             score: match.score,
+  //             id: match.id,
+  //             description: match.metadata.description,
+  //             timeline: match.metadata.timeline,
+  //             salary: match.metadata.salary,
+  //             location: match.metadata.location,
+  //           }
+  //         ))
+  //         localStorage.setItem('targetJobMatches', JSON.stringify(targetJobMatches));
 
-          console.log("store in firestore")
-          // save targetJob to firestore and targetJobMatches to firestore
-          const userDocRef = doc(db, 'users', userId);
-          // await setDoc(userDocRef, {targetJob, targetJobMatches}, { merge: true });
-          const batch = writeBatch(db)
-          batch.set(userDocRef, {targetJob: [targetJob], targetJobMatches}, { merge: true });
-          await batch.commit();
+  //         console.log("store in firestore")
+  //         // save targetJob to firestore and targetJobMatches to firestore
+  //         const userDocRef = doc(db, 'users', userId);
+  //         // await setDoc(userDocRef, {targetJob, targetJobMatches}, { merge: true });
+  //         const batch = writeBatch(db)
+  //         batch.set(userDocRef, {targetJob: [targetJob], targetJobMatches}, { merge: true });
+  //         await batch.commit();
 
-          setUploadStatus('');
-          setFileName('');
-          // router.push(`/users/${userId.slice(-10)}/matches?fileName=${fileName}&targetJob=${targetJob}`);
-        }
-        catch (error) {
-          console.log('handleSubmitTargetJob error: ', error);
-        }
-      }
-      handleSubmitTargetJob(targetJob);
-    }
-  }, [targetJob]);
+  //         setUploadStatus('');
+  //         setFileName('');
+  //         // router.push(`/users/${userId.slice(-10)}/matches?fileName=${fileName}&targetJob=${targetJob}`);
+  //       }
+  //       catch (error) {
+  //         console.log('handleSubmitTargetJob error: ', error);
+  //       }
+  //     }
+  //     handleSubmitTargetJob(targetJob);
+  //   }
+  // }, [targetJob]);
 
   useEffect(() => {
     if (uploadStatus === 'successful') {
@@ -136,7 +136,7 @@ const FileUpload = () => {
       
       // ask user to enter target jobs or navigate to /users/[userId]/matches
       // open targetJobDialog with handleSubmit(() => setTargetJob(value))
-      setTargetJob('devops engineer');
+      // setTargetJob('devops engineer');
 
     }
   }, [uploadStatus]);

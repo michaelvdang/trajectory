@@ -1,7 +1,7 @@
 'use client';
 import { Header } from '@/components/ui/Header';
 import { db } from '@/firebase';
-import { JobData, MatchData, UserData } from '@/types';
+import { JobData, MatchData, SkillAssessment, UserData } from '@/types';
 import { useUser } from '@clerk/nextjs';
 import axios from 'axios';
 import { doc, getDoc, onSnapshot } from 'firebase/firestore';
@@ -15,6 +15,7 @@ const JobPage = ({params} : {params: {jobId: string}}) => {
   const { isLoaded, isSignedIn, user } = useUser();
   const [jobData, setJobData] = useState<JobData>(null);
   const jobId = params.jobId;
+  const [skillAssessments, setSkillAssessments] = useState<SkillAssessment>(null);
 
   useEffect(() => {
     setTargetJob(localStorage.getItem('targetJob'));
@@ -67,10 +68,39 @@ const JobPage = ({params} : {params: {jobId: string}}) => {
     }
   }, [targetJob]);
 
+  
+
+
   // get job title required skills and experience
-
   // get user skills assessments, default to 1 if not in firestore
+  useEffect(() => {
+    if (isLoaded && isSignedIn && jobData && jobData.skills.length > 0) {
+      // get all skills assessments from fire store
+      // find skills in jobData.skills that are not in firestore
+      // if missingSkills.length > 0, fetch userData from firestore
+      // send userData, missingSkills to createSkillAssessment endpoint 
+      // store returned assessments in firestore
+      // set skillAssessments
 
+      const userDocRef = doc(db, 'users', user.id);
+      const unsubscribe = onSnapshot(userDocRef, (doc) => {
+        if (doc.exists()) {
+          const data = doc.data();
+          setUserData(data.userData);
+          setSkillAssessments(data.skillAssessments);
+          console.log('onsnapshot userData: ', data.userData);
+          console.log('onsnapshot skillAssessments: ', data.skillAssessments);
+        }
+      });
+      return () => unsubscribe();
+    }
+  })
+
+
+
+
+
+  
   useEffect(() => {
     if (isLoaded && isSignedIn) {
       const userDocRef = doc(db, 'users', user.id);
@@ -102,6 +132,12 @@ const JobPage = ({params} : {params: {jobId: string}}) => {
         <>
           <div className="flex flex-col items-center">
             <h2 className="text-xl font-bold mb-2">Required Skills:</h2>
+            <ul>
+              {jobData.skills.map((skill, index) => (
+                <li key={index} className="text-lg mb-2">{skill}</li>
+              ))}
+            </ul>
+            <h2 className="text-xl font-bold mb-2">Users Assessments:</h2>
             <ul>
               {jobData.skills.map((skill, index) => (
                 <li key={index} className="text-lg mb-2">{skill}</li>

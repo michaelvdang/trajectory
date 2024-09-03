@@ -69,22 +69,43 @@ export async function POST (
         jobSkills.push(topMatches[i].skills[j]);
       }
     }
+
+
+    // move to new endpoint and let client send userData and jobSkills to generate assessments when landing on jobId page
+
     // have gpt assess user skills on each job skill based on userData
     const assessments = await generateSkillAssessments(userData, jobSkills); 
 
     // // store proficiency level in firestore under assessments collection, each skill is a doc with skill name
-    const assessmentsColRef = admin.firestore().collection(`users/${userId}/assessments`);
+    // const userDocRef = admin.firestore().doc(`users/${userId}`);
     const batch = admin.firestore().batch();
     assessments.forEach(assessment => {
       // remove / and : from skill
-      const key = assessment[0].replace(/:/g, '').replace(/\//g, '');
-      const docRef = assessmentsColRef.doc(key);
-      const data = {score: assessment[1]};
+      // const key = assessment[0].replace(/:/g, '').replace(/\//g, '');
+      const data = {assessments: {
+        [assessment[0]]: assessment[1]
+      }};
+      batch.set(userDocRef, data, { merge: true });
+    })
     
-      batch.set(docRef, data, { merge: true });
-    });
+    // const assessmentsColRef = admin.firestore().collection(`users/${userId}/assessments`);
+    // // const batch = admin.firestore().batch();
+    // assessments.forEach(assessment => {
+    //   // remove / and : from skill
+    //   const key = assessment[0].replace(/:/g, '').replace(/\//g, '');
+    //   const docRef = assessmentsColRef.doc(key);
+    //   const data = {score: assessment[1]};
+    
+    //   batch.set(docRef, data, { merge: true });
+    // });
 
     await batch.commit();
+
+
+
+
+
+
 
     // user selects job, get job skills required
     // on client: redirect to job/[jobId] page to display job skills and current skills, send userId to get skills proficiency level and contrast with job skills

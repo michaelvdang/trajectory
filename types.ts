@@ -28,3 +28,8 @@ export interface JobData {
   salary: string;
   location: string;
 }
+
+export interface SkillAssessment {
+  name: string;
+  score: number;
+}
