@@ -10,6 +10,7 @@ import { doc, writeBatch } from 'firebase/firestore'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
+import { MatchData } from "@/types";
 
 const page = () => {
   const { isLoaded, isSignedIn, user } = useUser()
@@ -31,12 +32,16 @@ const page = () => {
         { headers: { 'Content-Type': 'application/json' } }
       )
       // store in local storage
-      const targetJobMatches = response.data.matches.map((match: any) => (
+      const targetJobMatches : MatchData[] = response.data.matches.map((match: any) => (
         {
           title: match.metadata.title,
           skills: match.metadata.skills,
           score: match.score,
-          id: match.id
+          id: match.id,
+          description: match.metadata.description,
+          timeline: match.metadata.timeline,
+          salary: match.metadata.salary,
+          location: match.metadata.location,
         }
       ))
       localStorage.setItem('targetJobMatches', JSON.stringify(targetJobMatches));

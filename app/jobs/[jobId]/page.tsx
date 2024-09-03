@@ -30,7 +30,11 @@ const JobPage = ({params} : {params: {jobId: string}}) => {
         setJobData({
           id: jobData.job_id,
           title: jobData.title,
-          skills: jobData.skills_needed,
+          skills: jobData.skills,
+          description: jobData.description,
+          timeline: jobData.timeline,
+          salary: jobData.salary,
+          location: jobData.location,
         });
       }
       else {

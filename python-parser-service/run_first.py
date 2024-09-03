@@ -53,7 +53,11 @@ def load_sample_data():
                     "metadata": {
                         "job_id": job_id,
                         "title": title,
-                        "skills": skills
+                        "skills": skills,
+                        "description": job['description'],
+                        "timeline": job['timeline'],
+                        "salary": job['salary'],
+                        "location": job['location'],
                     }
                 },
             ],

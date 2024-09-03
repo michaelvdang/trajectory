@@ -2,7 +2,8 @@
   {
     "job_id": "software_engineer",
     "title": "Software Engineer",
-    "skills_needed": [
+    "description": "A Software Engineer designs, develops, tests, and maintains software applications or systems. This role involves coding in various programming languages, working on software architecture, and collaborating with other engineers and stakeholders to build scalable and efficient software solutions.",
+    "skills": [
       "HTML",
       "CSS",
       "JavaScript",
@@ -20,24 +21,44 @@
       "Basic AWS services",
       "CI/CD concepts",
       "Terraform"
-    ]
+    ],
+    "timeline": "1 year",
+    "salary": "$80,000 - $150,000",
+    "location": "on-site/hybrid/remote"
   },
   {
     "job_id": "cyber_security_expert",
     "title": "Cyber Security Expert",
-    "skills_needed": [
-      "Fundamental IT skills",
-      "Operating systems",
-      "Networking knowledge",
-      "Network security skills and knowledge",
-      "Cloud skills and knowledge",
-      "Programming skills"
-    ]
+    "description": "A Cyber Security Expert is responsible for protecting an organization's computer systems and networks from cyber threats. This role involves identifying vulnerabilities, implementing security measures, and responding to security breaches. The expert will work to safeguard sensitive data and ensure compliance with security regulations.",
+    "skills": [
+      "Network security",
+      "Firewalls and VPNs",
+      "Intrusion Detection Systems (IDS)",
+      "Intrusion Prevention Systems (IPS)",
+      "Security Information and Event Management (SIEM)",
+      "Penetration Testing",
+      "Ethical Hacking",
+      "Malware Analysis",
+      "Cryptography",
+      "Risk Management",
+      "Vulnerability Assessment",
+      "Incident Response",
+      "Security Compliance (e.g., GDPR, HIPAA)",
+      "Security Operations Center (SOC) experience",
+      "Operating Systems (Windows, Linux)",
+      "Cloud Security (AWS, Azure, GCP)",
+      "Scripting (e.g., Python, Bash)",
+      "Security Auditing"
+    ],
+    "timeline": "1 year",
+    "salary": "$100,000 - $200,000",
+    "location": "on-site/hybrid/remote"
   },
   {
     "job_id": "database_administrator",
     "title": "Database Administrator",
-    "skills_needed": [
+    "description": "A Database Administrator (DBA) is responsible for the management, maintenance, and optimization of databases. This role involves ensuring database performance, security, and reliability, as well as performing backup and recovery operations. The DBA works to safeguard data integrity and support database-driven applications.",
+    "skills": [
       "Basic RDBMS concepts",
       "SQL",
       "Joins",
@@ -53,12 +74,16 @@
       "Advanced SQL",
       "Troubleshooting techniques",
       "SQL optimization techniques"
-    ]
+    ],
+    "timeline": "1 year",
+    "salary": "$70,000 - $130,000",
+    "location": "on-site/hybrid/remote"
   },
   {
     "job_id": "frontend_developer",
     "title": "Frontend Developer",
-    "skills_needed": [
+    "description": "A Frontend Developer focuses on creating and implementing the visual components of a web application or website. This role involves translating design mockups into interactive and responsive user interfaces using various web technologies. The developer ensures that the application is user-friendly and performs well across different devices and browsers.",
+    "skills": [
       "HTML",
       "CSS",
       "JavaScript",
@@ -75,12 +100,16 @@
       "UI/UX Design Principles",
       "Accessibility",
       "Performance Optimization"
-    ]
+    ],
+    "timeline": "1 year",
+    "salary": "$80,000 - $140,000",
+    "location": "on-site/hybrid/remote"
   },
   {
     "job_id": "backend_developer",
     "title": "Backend Developer",
-    "skills_needed": [
+    "description": "A Backend Developer is responsible for building and maintaining the server-side components of web applications. This role involves designing and implementing APIs, managing databases, and ensuring that the application’s server infrastructure is robust and scalable. Backend Developers work closely with frontend developers and other stakeholders to deliver efficient and effective software solutions.",
+    "skills": [
       "Node.js",
       "Express.js",
       "Python",
@@ -101,12 +130,16 @@
       "GitHub",
       "Linux",
       "AWS"
-    ]
+    ],
+    "timeline": "1 year",
+    "salary": "$85,000 - $140,000",
+    "location": "on-site/hybrid/remote"
   },
   {
     "job_id": "devops_engineer",
     "title": "DevOps Engineer",
-    "skills_needed": [
+    "description": "A DevOps Engineer focuses on the integration of development and operations to streamline software delivery processes. This role involves automating deployment pipelines, managing infrastructure, and ensuring system reliability and scalability. DevOps Engineers work to improve collaboration between development and IT teams through continuous integration and continuous delivery practices.",
+    "skills": [
       "Linux",
       "Shell Scripting",
       "Python",
@@ -125,12 +158,16 @@
       "Monitoring Tools",
       "Networking",
       "Security Best Practices"
-    ]
+    ],
+    "timeline": "1 year",
+    "salary": "$90,000 - $160,000",
+    "location": "on-site/hybrid/remote"
   },
   {
     "job_id": "mobile_app_developer",
     "title": "Mobile App Developer",
-    "skills_needed": [
+    "description": "A Mobile App Developer designs and builds applications for mobile devices. This role involves working with mobile frameworks and languages to create user-friendly and high-performance apps for platforms such as iOS and Android. Mobile App Developers handle everything from the user interface to the app's interaction with backend services and APIs.",
+    "skills": [
       "Java",
       "Kotlin",
       "Swift",
@@ -147,12 +184,16 @@
       "UI/UX Design Principles",
       "Performance Optimization",
       "Testing and Debugging"
-    ]
+    ],
+    "timeline": "1 year",
+    "salary": "$80,000 - $140,000",
+    "location": "on-site/hybrid/remote"
   },
   {
     "job_id": "data_scientist",
     "title": "Data Scientist",
-    "skills_needed": [
+    "description": "A Data Scientist analyzes and interprets complex data to help organizations make informed decisions. This role involves using statistical techniques, machine learning algorithms, and data visualization tools to extract insights from large datasets. Data Scientists collaborate with other departments to provide actionable recommendations based on data analysis.",
+    "skills": [
       "Python",
       "R",
       "SQL",
@@ -174,6 +215,9 @@
       "Spark",
       "Data Cleaning",
       "Data Wrangling"
-    ]
+    ],
+    "timeline": "1 year",
+    "salary": "$90,000 - $150,000",
+    "location": "on-site/hybrid/remote"
   }
 ]

@@ -18,6 +18,7 @@ import { signInWithCustomToken } from "firebase/auth";
 import { doc, getDoc, setDoc, writeBatch } from "firebase/firestore";
 import { Header } from "@/components/ui/Header";
 import Link from "next/link";
+import { MatchData } from "@/types";
 
 const FileSvgDraw = () => {
   return (
@@ -86,12 +87,16 @@ const FileUpload = () => {
             { headers: { 'Content-Type': 'application/json' } }
           )
           // store in local storage
-          const targetJobMatches = response.data.matches.map((match: any) => (
+          const targetJobMatches: MatchData[] = response.data.matches.map((match: any) => (
             {
               title: match.metadata.title,
               skills: match.metadata.skills,
               score: match.score,
-              id: match.id
+              id: match.id,
+              description: match.metadata.description,
+              timeline: match.metadata.timeline,
+              salary: match.metadata.salary,
+              location: match.metadata.location,
             }
           ))
           localStorage.setItem('targetJobMatches', JSON.stringify(targetJobMatches));

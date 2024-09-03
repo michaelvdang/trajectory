@@ -97,9 +97,9 @@ export default function Jobs() {
                 key={index}
                 jobId={job.id}
                 jobTitle={job.title}
-                jobDescription={"No description available"}
-                timeline={"No timeline available"}
-                salary={"No salary available"}
+                jobDescription={job.description || "No description available"}
+                timeline={job.timeline || "No timeline available"}
+                salary={job.salary || "No salary available"}
                 difficulty={"No difficulty available"}
                 // skills={job.skills}
                 // score={job.score}
@@ -119,9 +119,9 @@ export default function Jobs() {
                 key={index}
                 jobId={job.id}
                 jobTitle={job.title}
-                jobDescription={"No description available"}
-                timeline={"No timeline available"}
-                salary={"No salary available"}
+                jobDescription={job.description || "No description available"}
+                timeline={job.timeline || "No timeline available"}
+                salary={job.salary || "No salary available"}
                 difficulty={"No difficulty available"}
                 // skills={job.skills}
                 // score={job.score}

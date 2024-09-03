@@ -64,7 +64,7 @@ async def get_image(file: UploadFile = File(...),
     })})
     data = response.json()
     print('matching job titles: ', [d['id'] for d in data['matches']])
-    
+
     topMatches= []
     matches = data['matches']
     for match in matches:
@@ -73,6 +73,10 @@ async def get_image(file: UploadFile = File(...),
                'id': match['id'],
                'title': match['metadata']['title'],
                'skills': match['metadata']['skills'],
+               'description': match['metadata']['description'],
+               'timeline': match['metadata']['timeline'],
+               'salary': match['metadata']['salary'],
+               'location': match['metadata']['location'],
                'score': match['score']
            }
        )
