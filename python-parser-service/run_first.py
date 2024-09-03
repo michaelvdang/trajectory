@@ -1,53 +1,50 @@
+
 import json
 import os
+
 from dotenv import load_dotenv
 from openai import OpenAI
 from pinecone import Pinecone
 
-# Load environment variables
-load_dotenv()
 
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 INDEX_NAME = "trajectory-app"
 NAME_SPACE = "ns1"
 
+load_dotenv()
+
 def load_sample_data():
-    # Initialize OpenAI and Pinecone
+    load_dotenv()
+
     openai = OpenAI()
     pinecone = Pinecone(api_key=os.getenv('PINECONE_API_KEY'))
-    index = pinecone.Index(INDEX_NAME)
+    pinecone_index = "trajectory-app"
+    namespace = "ns1"
+    index = pinecone.Index(pinecone_index)
 
     model_name = "text-embedding-3-small"
 
-    # Load jobs data from the JSON file
-    with open("data/jobs.json") as file:
-        jobs = json.load(file)
+
+    jobs = json.loads(open("data/jobs.json").read())
+
+    print('jobs: ', jobs)
 
     for job in jobs:
-        # Extract fields from the JSON object
+        # Inserts the complaint into the Pinecone index with the complaint text as the vector
         job_id = job['job_id']
         title = job['title']
-        description = job.get('description', '')
+        skills = job['skills_needed']
 
-        # Extract skill names from the skills_needed field
-        skill_names = [skill['name'] for skill in job['skills_needed']]
-        skills_text = " ".join(skill_names)
+        skills_text = " ".join(skills)
 
-        # Extract and concatenate requirements and preferences
-        requirements = " ".join(job.get('requirements', []))
-        preferences = " ".join(job.get('preferences', []))
-
-        # Combine all text fields for embedding creation
-        combined_text = f"{title} {description} {skills_text} {requirements} {preferences}"
-
-        # Create the embedding using OpenAI
+        # Create the embedding for the complaint text
         raw_embedding = openai.embeddings.create(
-            input=[combined_text],
+            input=[skills_text],
             model=model_name
         )
         embedding = raw_embedding.data[0].embedding
 
-        # Insert the job into the Pinecone index
+        # Insert the complaint into the Pinecone index
         index.upsert(
             vectors=[
                 {
@@ -56,14 +53,11 @@ def load_sample_data():
                     "metadata": {
                         "job_id": job_id,
                         "title": title,
-                        "description": description,
-                        "skills_needed": skill_names,  # List of strings (skill names)
-                        "requirements": job.get('requirements', []),
-                        "preferences": job.get('preferences', [])
+                        "skills": skills
                     }
                 },
             ],
-            namespace=NAME_SPACE
+            namespace=namespace
         )    
 
 if __name__ == "__main__":
