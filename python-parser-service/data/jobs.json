@@ -1,421 +1,179 @@
 [
   {
-    "job_id": "junior_frontend",
-    "title": "Junior Frontend Developer",
-    "description": "Responsible for building and maintaining the user interface of web applications.",
+    "job_id": "software_engineer",
+    "title": "Software Engineer",
     "skills_needed": [
-      {"name": "HTML", "level": "intermediate"},
-      {"name": "CSS", "level": "intermediate"},
-      {"name": "JavaScript", "level": "intermediate"},
-      {"name": "React", "level": "basic"},
-      {"name": "Basic Git", "level": "basic"},
-      {"name": "Responsive Design", "level": "intermediate"},
-      {"name": "JavaScript Frameworks", "level": "basic"},
-      {"name": "Basic Web Performance Optimization", "level": "basic"},
-      {"name": "Version Control (Git)", "level": "basic"},
-      {"name": "Cross-Browser Compatibility", "level": "basic"}
-    ],
-    "requirements": [
       "HTML",
       "CSS",
       "JavaScript",
-      "React"
-    ],
-    "preferences": [
-      "TypeScript",
-      "Responsive Design"
+      "npm",
+      "git",
+      "GitHub",
+      "React",
+      "TailwindCSS",
+      "Node.js",
+      "SQL",
+      "NoSQL",
+      "RESTful APIs",
+      "JWT Auth",
+      "Linux Basics",
+      "Basic AWS services",
+      "CI/CD concepts",
+      "Terraform"
     ]
   },
   {
-    "job_id": "junior_backend",
-    "title": "Junior Backend Developer",
-    "description": "Handles server-side logic, database management, and integration with frontend systems.",
+    "job_id": "cyber_security_expert",
+    "title": "Cyber Security Expert",
     "skills_needed": [
-      {"name": "JavaScript (Node.js) or Python", "level": "intermediate"},
-      {"name": "SQL and NoSQL Databases", "level": "intermediate"},
-      {"name": "RESTful APIs", "level": "basic"},
-      {"name": "Git", "level": "basic"},
-      {"name": "Server-Side Scripting", "level": "intermediate"},
-      {"name": "Authentication and Authorization", "level": "basic"},
-      {"name": "Cloud Platforms (AWS/Azure/GCP)", "level": "basic"},
-      {"name": "MVC Architecture", "level": "basic"},
-      {"name": "Unit Testing", "level": "basic"},
-      {"name": "Error Handling", "level": "basic"}
-    ],
-    "requirements": [
-      "JavaScript or Python",
-      "SQL and NoSQL Databases",
-      "RESTful APIs"
-    ],
-    "preferences": [
-      "Cloud Platforms",
-      "Authentication and Authorization"
+      "Fundamental IT skills",
+      "Operating systems",
+      "Networking knowledge",
+      "Network security skills and knowledge",
+      "Cloud skills and knowledge",
+      "Programming skills"
     ]
   },
   {
-    "job_id": "devops",
-    "title": "DevOps Engineer",
-    "description": "Focuses on automation, monitoring, and optimizing the deployment pipeline and infrastructure.",
+    "job_id": "database_administrator",
+    "title": "Database Administrator",
     "skills_needed": [
-      {"name": "CI/CD Pipelines", "level": "advanced"},
-      {"name": "Docker", "level": "advanced"},
-      {"name": "Kubernetes", "level": "advanced"},
-      {"name": "Terraform", "level": "intermediate"},
-      {"name": "AWS/GCP/Azure", "level": "intermediate"},
-      {"name": "Linux/Unix Systems", "level": "advanced"},
-      {"name": "Version Control (Git)", "level": "advanced"},
-      {"name": "Scripting Languages (Bash, Python)", "level": "intermediate"},
-      {"name": "Monitoring and Logging", "level": "intermediate"},
-      {"name": "Infrastructure as Code (IaC)", "level": "intermediate"}
-    ],
-    "requirements": [
-      "CI/CD Pipelines",
-      "Docker",
-      "Kubernetes"
-    ],
-    "preferences": [
-      "Terraform",
-      "Cloud Platforms"
+      "Basic RDBMS concepts",
+      "SQL",
+      "Joins",
+      "MySQL",
+      "Indexes",
+      "Database design",
+      "PostgreSQL",
+      "Database security",
+      "Database infrastructure skills",
+      "Database automation",
+      "Database migrations",
+      "Data and processing",
+      "Advanced SQL",
+      "Troubleshooting techniques",
+      "SQL optimization techniques"
     ]
   },
   {
-    "job_id": "senior_frontend",
-    "title": "Senior Frontend Developer",
-    "description": "Leads frontend development efforts, focusing on complex features and optimizing performance.",
+    "job_id": "frontend_developer",
+    "title": "Frontend Developer",
     "skills_needed": [
-      {"name": "Advanced JavaScript", "level": "advanced"},
-      {"name": "React or Vue.js", "level": "advanced"},
-      {"name": "TypeScript", "level": "advanced"},
-      {"name": "State Management (Redux, Context API)", "level": "advanced"},
-      {"name": "Performance Optimization", "level": "advanced"},
-      {"name": "Cross-Browser Compatibility", "level": "advanced"},
-      {"name": "Advanced CSS (Sass, PostCSS)", "level": "advanced"},
-      {"name": "API Integration", "level": "advanced"},
-      {"name": "Testing Frameworks (Jest, Cypress)", "level": "advanced"},
-      {"name": "Build Tools (Webpack, Babel)", "level": "advanced"}
-    ],
-    "requirements": [
-      "Advanced JavaScript",
-      "React or Vue.js",
-      "Performance Optimization"
-    ],
-    "preferences": [
-      "TypeScript",
-      "Testing Frameworks"
-    ]
-  },
-  {
-    "job_id": "senior_backend",
-    "title": "Senior Backend Developer",
-    "description": "Oversees backend development, focusing on scalable architectures and performance.",
-    "skills_needed": [
-      {"name": "Advanced JavaScript (Node.js) or Python", "level": "advanced"},
-      {"name": "Microservices Architecture", "level": "advanced"},
-      {"name": "Advanced SQL and NoSQL Databases", "level": "advanced"},
-      {"name": "API Design and Documentation", "level": "advanced"},
-      {"name": "Authentication and Authorization", "level": "advanced"},
-      {"name": "Cloud Platforms (AWS/GCP/Azure)", "level": "advanced"},
-      {"name": "Message Queues (RabbitMQ, Kafka)", "level": "intermediate"},
-      {"name": "Caching Strategies (Redis)", "level": "intermediate"},
-      {"name": "Performance Tuning", "level": "advanced"},
-      {"name": "Containerization (Docker, Kubernetes)", "level": "advanced"}
-    ],
-    "requirements": [
-      "Advanced JavaScript or Python",
-      "Microservices Architecture",
-      "SQL and NoSQL Databases"
-    ],
-    "preferences": [
-      "Message Queues",
-      "Caching Strategies"
-    ]
-  },
-  {
-    "job_id": "junior_full_stack",
-    "title": "Junior Full Stack Developer",
-    "description": "Works on both frontend and backend tasks, gaining experience in full-stack development.",
-    "skills_needed": [
-      {"name": "HTML/CSS", "level": "intermediate"},
-      {"name": "JavaScript", "level": "intermediate"},
-      {"name": "Basic Backend Language (Node.js, Python)", "level": "intermediate"},
-      {"name": "Basic Database Management", "level": "intermediate"},
-      {"name": "RESTful APIs", "level": "basic"},
-      {"name": "Basic Git", "level": "basic"},
-      {"name": "Basic Frontend Framework (React, Vue.js)", "level": "basic"},
-      {"name": "Basic Deployment Practices", "level": "basic"},
-      {"name": "Basic Understanding of MVC Architecture", "level": "basic"},
-      {"name": "Debugging Skills", "level": "basic"}
-    ],
-    "requirements": [
-      "HTML/CSS",
+      "HTML",
+      "CSS",
       "JavaScript",
-      "Backend Language",
-      "Database Management"
-    ],
-    "preferences": [
-      "Frontend Framework",
-      "Deployment Practices"
+      "React",
+      "Vue.js",
+      "Angular",
+      "Sass",
+      "Webpack",
+      "Babel",
+      "Responsive Design",
+      "Cross-Browser Compatibility",
+      "Git",
+      "GitHub",
+      "UI/UX Design Principles",
+      "Accessibility",
+      "Performance Optimization"
     ]
   },
   {
-    "job_id": "senior_full_stack",
-    "title": "Senior Full Stack Developer",
-    "description": "Leads full-stack development, handling complex features and optimizing both frontend and backend.",
+    "job_id": "backend_developer",
+    "title": "Backend Developer",
     "skills_needed": [
-      {"name": "Advanced JavaScript (React, Vue.js)", "level": "advanced"},
-      {"name": "Backend Technologies (Node.js, Django, Ruby on Rails)", "level": "advanced"},
-      {"name": "Database Design (SQL, NoSQL)", "level": "advanced"},
-      {"name": "API Design and Integration", "level": "advanced"},
-      {"name": "DevOps Skills (CI/CD, Docker, Kubernetes)", "level": "advanced"},
-      {"name": "Cloud Platforms (AWS/GCP/Azure)", "level": "advanced"},
-      {"name": "Security Best Practices", "level": "advanced"},
-      {"name": "Performance Optimization", "level": "advanced"},
-      {"name": "Testing Frameworks", "level": "advanced"},
-      {"name": "Version Control Systems (Git)", "level": "advanced"}
-    ],
-    "requirements": [
-      "Advanced JavaScript",
-      "Backend Technologies",
-      "Database Design",
-      "API Integration"
-    ],
-    "preferences": [
-      "DevOps Skills",
+      "Node.js",
+      "Express.js",
+      "Python",
+      "Django",
+      "Flask",
+      "Ruby on Rails",
+      "Java",
+      "Spring Boot",
+      "SQL",
+      "NoSQL",
+      "RESTful APIs",
+      "GraphQL",
+      "Docker",
+      "Kubernetes",
+      "Microservices",
+      "CI/CD",
+      "Git",
+      "GitHub",
+      "Linux",
+      "AWS"
+    ]
+  },
+  {
+    "job_id": "devops_engineer",
+    "title": "DevOps Engineer",
+    "skills_needed": [
+      "Linux",
+      "Shell Scripting",
+      "Python",
+      "Docker",
+      "Kubernetes",
+      "CI/CD",
+      "Jenkins",
+      "Git",
+      "GitHub",
+      "AWS",
+      "Azure",
+      "Google Cloud Platform",
+      "Terraform",
+      "Ansible",
+      "Puppet",
+      "Monitoring Tools",
+      "Networking",
       "Security Best Practices"
     ]
   },
   {
-    "job_id": "android_engineer",
-    "title": "Android Engineer",
-    "description": "Develops and maintains Android applications, focusing on mobile UI/UX and performance.",
+    "job_id": "mobile_app_developer",
+    "title": "Mobile App Developer",
     "skills_needed": [
-      {"name": "Java/Kotlin", "level": "advanced"},
-      {"name": "Android SDK", "level": "advanced"},
-      {"name": "Android Studio", "level": "advanced"},
-      {"name": "UI/UX Design Principles", "level": "intermediate"},
-      {"name": "RESTful APIs", "level": "intermediate"},
-      {"name": "Version Control (Git)", "level": "intermediate"},
-      {"name": "Gradle Build System", "level": "intermediate"},
-      {"name": "Testing (JUnit, Espresso)", "level": "intermediate"},
-      {"name": "Firebase Integration", "level": "intermediate"},
-      {"name": "Material Design", "level": "intermediate"}
-    ],
-    "requirements": [
-      "Java/Kotlin",
-      "Android SDK",
-      "Android Studio"
-    ],
-    "preferences": [
-      "Firebase Integration",
-      "UI/UX Design Principles"
-    ]
-  },
-  {
-    "job_id": "ios_engineer",
-    "title": "iOS Engineer",
-    "description": "Develops and maintains iOS applications with a focus on performance and user experience.",
-    "skills_needed": [
-      {"name": "Swift", "level": "advanced"},
-      {"name": "Objective-C", "level": "intermediate"},
-      {"name": "Xcode", "level": "advanced"},
-      {"name": "UIKit/SwiftUI", "level": "advanced"},
-      {"name": "CocoaPods", "level": "intermediate"},
-      {"name": "RESTful APIs", "level": "intermediate"},
-      {"name": "Version Control (Git)", "level": "intermediate"},
-      {"name": "Unit Testing (XCTest)", "level": "intermediate"},
-      {"name": "Core Data", "level": "intermediate"},
-      {"name": "Apple Human Interface Guidelines", "level": "intermediate"}
-    ],
-    "requirements": [
+      "Java",
+      "Kotlin",
       "Swift",
-      "Xcode",
-      "UIKit/SwiftUI"
-    ],
-    "preferences": [
       "Objective-C",
-      "Core Data"
-    ]
-  },
-  {
-    "job_id": "qa",
-    "title": "QA Engineer",
-    "description": "Ensures software quality through testing and validation processes.",
-    "skills_needed": [
-      {"name": "Manual Testing", "level": "intermediate"},
-      {"name": "Automated Testing", "level": "intermediate"},
-      {"name": "Selenium", "level": "intermediate"},
-      {"name": "JIRA or Bug Tracking Tools", "level": "intermediate"},
-      {"name": "API Testing", "level": "intermediate"},
-      {"name": "SQL", "level": "intermediate"},
-      {"name": "Performance Testing", "level": "intermediate"},
-      {"name": "Version Control (Git)", "level": "basic"},
-      {"name": "Testing Frameworks (JUnit, TestNG)", "level": "intermediate"},
-      {"name": "Basic Understanding of Programming", "level": "basic"}
-    ],
-    "requirements": [
-      "Manual Testing",
-      "Automated Testing",
-      "Selenium"
-    ],
-    "preferences": [
-      "API Testing",
-      "Performance Testing"
-    ]
-  },
-  {
-    "job_id": "software_architect",
-    "title": "Software Architect",
-    "description": "Designs and oversees the software architecture and ensures alignment with business goals.",
-    "skills_needed": [
-      {"name": "Software Design Patterns", "level": "advanced"},
-      {"name": "Architectural Patterns (MVC, MVVM, Microservices)", "level": "advanced"},
-      {"name": "System Design", "level": "advanced"},
-      {"name": "Cloud Platforms (AWS/GCP/Azure)", "level": "advanced"},
-      {"name": "DevOps Practices", "level": "advanced"},
-      {"name": "Security Best Practices", "level": "advanced"},
-      {"name": "Performance Optimization", "level": "advanced"},
-      {"name": "Technical Leadership", "level": "advanced"},
-      {"name": "API Design", "level": "advanced"},
-      {"name": "Data Modeling", "level": "advanced"}
-    ],
-    "requirements": [
-      "Software Design Patterns",
-      "Architectural Patterns",
-      "System Design"
-    ],
-    "preferences": [
-      "Cloud Platforms",
-      "Technical Leadership"
+      "React Native",
+      "Flutter",
+      "Dart",
+      "Android SDK",
+      "iOS SDK",
+      "RESTful APIs",
+      "GraphQL",
+      "Git",
+      "GitHub",
+      "UI/UX Design Principles",
+      "Performance Optimization",
+      "Testing and Debugging"
     ]
   },
   {
     "job_id": "data_scientist",
     "title": "Data Scientist",
-    "description": "Analyzes and interprets complex data to provide insights and drive decision-making.",
     "skills_needed": [
-      {"name": "Python/R", "level": "advanced"},
-      {"name": "Machine Learning Algorithms", "level": "advanced"},
-      {"name": "Data Visualization (Matplotlib, Seaborn)", "level": "advanced"},
-      {"name": "SQL", "level": "intermediate"},
-      {"name": "Data Wrangling", "level": "intermediate"},
-      {"name": "Statistical Analysis", "level": "intermediate"},
-      {"name": "Big Data Technologies (Hadoop, Spark)", "level": "intermediate"},
-      {"name": "Deep Learning Frameworks (TensorFlow, PyTorch)", "level": "intermediate"},
-      {"name": "Version Control (Git)", "level": "basic"},
-      {"name": "Data Mining", "level": "intermediate"}
-    ],
-    "requirements": [
-      "Python/R",
-      "Machine Learning Algorithms",
-      "Data Visualization"
-    ],
-    "preferences": [
-      "Big Data Technologies",
-      "Deep Learning Frameworks"
-    ]
-  },
-  {
-    "job_id": "data_analyst",
-    "title": "Data Analyst",
-    "description": "Interprets data and provides actionable insights to support business decisions.",
-    "skills_needed": [
-      {"name": "SQL", "level": "advanced"},
-      {"name": "Excel", "level": "intermediate"},
-      {"name": "Data Visualization (Tableau, Power BI)", "level": "intermediate"},
-      {"name": "Python/R", "level": "intermediate"},
-      {"name": "Statistical Analysis", "level": "intermediate"},
-      {"name": "Data Cleaning", "level": "intermediate"},
-      {"name": "Business Intelligence Tools", "level": "intermediate"},
-      {"name": "Basic Machine Learning Concepts", "level": "basic"},
-      {"name": "Version Control (Git)", "level": "basic"},
-      {"name": "Report Writing", "level": "intermediate"}
-    ],
-    "requirements": [
+      "Python",
+      "R",
       "SQL",
-      "Excel",
-      "Data Visualization"
-    ],
-    "preferences": [
-      "Python/R",
-      "Business Intelligence Tools"
-    ]
-  },
-  {
-    "job_id": "cyber_security",
-    "title": "Cyber Security Specialist",
-    "description": "Protects systems and data from security threats and vulnerabilities.",
-    "skills_needed": [
-      {"name": "Network Security", "level": "advanced"},
-      {"name": "Ethical Hacking", "level": "intermediate"},
-      {"name": "Firewalls and VPNs", "level": "intermediate"},
-      {"name": "Intrusion Detection Systems (IDS)", "level": "intermediate"},
-      {"name": "Penetration Testing", "level": "intermediate"},
-      {"name": "Encryption Techniques", "level": "intermediate"},
-      {"name": "Incident Response", "level": "intermediate"},
-      {"name": "Security Policies and Procedures", "level": "intermediate"},
-      {"name": "Vulnerability Assessment", "level": "intermediate"},
-      {"name": "Security Auditing", "level": "intermediate"}
-    ],
-    "requirements": [
-      "Network Security",
-      "Ethical Hacking",
-      "Firewalls and VPNs"
-    ],
-    "preferences": [
-      "Intrusion Detection Systems",
-      "Penetration Testing"
-    ]
-  },
-  {
-    "job_id": "mlops",
-    "title": "MLOps Engineer",
-    "description": "Focuses on the operationalization of machine learning models, including deployment and monitoring.",
-    "skills_needed": [
-      {"name": "Machine Learning Operations (MLOps) Tools", "level": "intermediate"},
-      {"name": "Docker", "level": "advanced"},
-      {"name": "Kubernetes", "level": "advanced"},
-      {"name": "CI/CD for ML Models", "level": "intermediate"},
-      {"name": "Cloud Platforms (AWS/GCP/Azure)", "level": "intermediate"},
-      {"name": "Model Deployment", "level": "intermediate"},
-      {"name": "Monitoring and Logging", "level": "intermediate"},
-      {"name": "Version Control (Git)", "level": "basic"},
-      {"name": "Python", "level": "intermediate"},
-      {"name": "Data Pipelines", "level": "intermediate"}
-    ],
-    "requirements": [
-      "Docker",
-      "Kubernetes",
-      "CI/CD for ML Models"
-    ],
-    "preferences": [
-      "Cloud Platforms",
-      "Model Deployment"
-    ]
-  },
-  {
-    "job_id": "ux_researcher",
-    "title": "UX Researcher",
-    "description": "Conducts research to understand user needs and inform design decisions.",
-    "skills_needed": [
-      {"name": "User Interviews", "level": "intermediate"},
-      {"name": "Surveys and Questionnaires", "level": "intermediate"},
-      {"name": "Usability Testing", "level": "intermediate"},
-      {"name": "Data Analysis", "level": "intermediate"},
-      {"name": "Wireframing and Prototyping", "level": "intermediate"},
-      {"name": "Human-Computer Interaction", "level": "intermediate"},
-      {"name": "User Journey Mapping", "level": "intermediate"},
-      {"name": "Persona Creation", "level": "intermediate"},
-      {"name": "Analytics Tools (e.g., Google Analytics)", "level": "intermediate"},
-      {"name": "Report Writing", "level": "intermediate"}
-    ],
-    "requirements": [
-      "User Interviews",
-      "Surveys and Questionnaires",
-      "Usability Testing"
-    ],
-    "preferences": [
-      "Wireframing and Prototyping",
-      "User Journey Mapping"
+      "NoSQL",
+      "Pandas",
+      "NumPy",
+      "Scikit-Learn",
+      "TensorFlow",
+      "Keras",
+      "PyTorch",
+      "Data Visualization",
+      "Matplotlib",
+      "Seaborn",
+      "Machine Learning",
+      "Deep Learning",
+      "Statistics",
+      "Big Data Technologies",
+      "Hadoop",
+      "Spark",
+      "Data Cleaning",
+      "Data Wrangling"
     ]
   }
 ]
