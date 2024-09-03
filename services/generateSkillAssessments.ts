@@ -3,7 +3,9 @@ import OpenAI from 'openai';
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY 
 });
+
 type SkillAssessment = [string, number]
+
 async function generateSkillAssessments(userData, jobSkills)
 : Promise<SkillAssessment[]>  
 {

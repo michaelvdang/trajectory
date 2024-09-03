@@ -29,7 +29,9 @@ export interface JobData {
   location: string;
 }
 
-export interface SkillAssessment {
-  name: string;
-  score: number;
-}
+// export interface SkillAssessment {
+//   name: string;
+//   score: number;
+// }
+
+export type SkillAssessments = Record<string, number>;
