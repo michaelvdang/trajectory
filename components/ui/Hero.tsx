@@ -69,7 +69,6 @@ export const Hero = () => {
         </div>
       </div>
     </div>
-    <Footer />
     </>
   );
 };
