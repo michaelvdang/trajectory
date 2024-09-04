@@ -18,7 +18,6 @@ export default function Home() {
     <DashPreview />
     <FAQs />
     <CallToAction />
-    <Footer />
     </>
   );
 };
