@@ -1,23 +1,13 @@
-"use client";
-
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { SignedIn, SignedOut, SignInButton, UserButton, useUser } from "@clerk/nextjs";
+import textLogo from "@/assets/images/TRAJECTORY__4_-removebg-preview.png";
+import Image from "next/image";
 import Link from "next/link";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 
 export const Header = () => {
-  const router = useRouter();
-  const { isSignedIn } = useUser();
-
-  useEffect(() => {
-    if (isSignedIn) {
-      router.push("/get-started/upload");
-    }
-  }, [isSignedIn, router]);
-
   return (
     <div className="flex justify-center items-center fixed top-3 w-full z-10">
       <nav className="flex gap-1 p-0.5 border border-violet-300/15 bg-neutral-400/10 backdrop-blur rounded-full">
+        {/* Updated a tags to Link components for navigation */}
         <Link href="/" className="nav-item text-violet-900 hover:text-gray-600">
           Home
         </Link>
@@ -33,12 +23,15 @@ export const Header = () => {
             className="nav-item text-violet-900 hover:text-gray-600"
           >
             Join Waitlist
+            {/* <SignInButton /> */}
+            {/* About */}
           </Link>
           <Link
             href="#"
             className="nav-item text-violet-900 hover:text-gray-600"
           >
             <SignInButton />
+            {/* About */}
           </Link>
         </SignedOut>
         <SignedIn>
@@ -53,6 +46,12 @@ export const Header = () => {
             className="nav-item text-violet-900 hover:text-gray-600"
           >
             Profile
+          </Link>
+          <Link
+            href="/get-started/upload"
+            className="nav-item bg-white text-gray-900 hover:bg-violet-500/30 hover:text-gray-600"
+          >
+            Get Started
           </Link>
           <UserButton />
         </SignedIn>
