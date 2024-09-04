@@ -67,34 +67,6 @@ async def get_image(file: UploadFile = File(...),
     # # ## use hard coded json (similar to parsed json)
     # # resume_json = json.load(open("resume_json.json"))
     # # print('resume_json: ', resume_json)
-    
-    # # send to nextjs api to get job results
-    # print('sending to nextjs api')
-    # response = requests.post(f'{NODE_SERVER_ADDRESS}/api/search', json={
-    #     'skills': resume_json['skills'],
-    #     'languages': resume_json['languages'],
-    #     'experiences': resume_json['experiences'],
-    #     'projects': resume_json['projects'],
-    #     'certifications': resume_json['certifications'],
-    # })
-    # data = response.json()
-    # print('matching job titles: ', [d['id'] for d in data['matches']])
-
-    # topMatches= []
-    # matches = data['matches']
-    # for match in matches:
-    #     topMatches.append(
-    #        {
-    #            'id': match['id'],
-    #            'title': match['metadata']['title'],
-    #            'skills': match['metadata']['skills'],
-    #            'description': match['metadata']['description'],
-    #            'timeline': match['metadata']['timeline'],
-    #            'salary': match['metadata']['salary'],
-    #            'location': match['metadata']['location'],
-    #            'score': match['score']
-    #        }
-    #     )
 
     # # # use fake data
     # # fake_data = json.load(open("topMatchesAndUserData.json"))

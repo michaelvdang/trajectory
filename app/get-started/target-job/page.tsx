@@ -1,6 +1,6 @@
 'use client'
 import { Button, buttonVariants } from "@/components/ui/button";
-import Loader from '@/components/Loader'
+import { Loader } from "lucide-react";
 import { Header } from '@/components/ui/Header'
 import { Input } from '@/components/ui/input'
 import { db } from '@/firebase'
