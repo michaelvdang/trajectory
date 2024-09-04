@@ -112,7 +112,7 @@ export default function Jobs() {
     </div>
     <div className="max-w-7xl w-full flex flex-col md:flex-row  relative gap-x-12 px-4">
       <div className="w-full mt-6 flex flex-col ">
-        <h2 className="text-xl font-bold mb-4 text-center">Top matches for {targetJob}</h2>
+        <h2 className="text-xl font-bold mb-4 text-center">Top matches for &quot;{targetJob}&quot;</h2>
         <div
           className="w-full flex flex-col gap-y-4"
         >
