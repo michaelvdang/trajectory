@@ -11,6 +11,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { MatchData } from "@/types";
+import { Footer } from '@/components/ui/Footer';
 
 const TargetJobPage = () => {
   const { isLoaded, isSignedIn, user } = useUser()
@@ -74,57 +75,60 @@ const TargetJobPage = () => {
   
   return (
     <>
-    <Header />
-    <div
-      className="flex flex-col items-center justify-center"
-    >
-      <div
-        className="max-w-7xl w-full flex flex-col items-center "
-      >
-        <div className="flex justify-center items-center pt-16">
-          <h1 className="text-3xl font-bold mb-4">What&apos;s Your 
-            Dream Job?</h1>
-        </div>
-        {isTargetJobSubmitted ? (
-          <>
-          <Loader />
-          </>
-        ) : (
-          <div className="relative flex flex-col justify-center items-center gap-6 bg-background rounded-lg p-12 md:p-24  w-1/2 border border-gray-300 max-w-xl md:max-w-3xl mx-auto">
-            <Input 
-              className="outline-dashed outline-1 outline-white" 
-              placeholder='Enter Job Title'
-              onChange={(e) => setTargetJob(e.target.value)}
-              value={targetJob}
-              onKeyDown={handleKeyDown}
-            />
+      <Header />
+      <div className="flex flex-col items-center justify-center py-12 bg-white">
+        <div className="max-w-7xl w-full flex flex-col items-center">
+          <div className="flex justify-center items-center pt-16 pb-12">
+            <h1 className="text-4xl font-bold mb-6 text-black">
+              What&apos;s Your Dream Job?
+            </h1>
           </div>
-        )}
-        <div
-          className="max-w-xl md:max-w-3xl py-12 px-12 md:px-24 w-full flex justify-between gap-6"
-        >
-          <Link
-            href="/get-started/upload"
-            className={buttonVariants({ variant: "default" })}
-          >
-            Prev
-          </Link>
-          {targetJob.length > 0 ? (
-            <Button onClick={() => handleSubmitTargetJob(targetJob)} variant="default">Next</Button>
+          {isTargetJobSubmitted ? (
+            <>
+              <Loader />
+            </>
           ) : (
-            <Button disabled variant="default">Next</Button>
+            <div className="relative flex flex-col justify-center items-center gap-6 bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-12 md:p-24 w-11/12 md:w-3/4 border border-purple-300 shadow-lg max-w-xl md:max-w-3xl mx-auto">
+              <Input
+                className="outline-dashed outline-2 outline-purple-300"
+                placeholder="Enter Job Title"
+                onChange={(e) => setTargetJob(e.target.value)}
+                value={targetJob}
+                onKeyDown={handleKeyDown}
+              />
+            </div>
           )}
-          {/* <Link 
-            href={`/users/${user.id.slice(-10)}/matches`}
-            className={buttonVariants({ variant: "default" })}
-          >
-            Next
-          </Link> */}
+          <div className="max-w-xl md:max-w-3xl py-12 px-12 md:px-24 w-full flex justify-between gap-6 mt-8">
+            <Link
+              href="/get-started/upload"
+              className="text-purple-800 hover:text-purple-900 transition-colors"
+            >
+              Prev
+            </Link>
+            {targetJob.length > 0 ? (
+              <Button
+                onClick={() => handleSubmitTargetJob(targetJob)}
+                className="bg-purple-800 text-white hover:bg-purple-900 transition-colors"
+                variant="default"
+              >
+                Next
+              </Button>
+            ) : (
+              <Button
+                disabled
+                className="bg-gray-400 text-white cursor-not-allowed"
+                variant="default"
+              >
+                Next
+              </Button>
+            )}
+          </div>
         </div>
-      </div>  
-    </div>
+      </div>
+      <Footer />
     </>
-  )
+  );
+  
 }
 
 export default TargetJobPage
