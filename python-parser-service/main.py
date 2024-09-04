@@ -12,6 +12,8 @@ import os
 
 load_dotenv()
 
+node_server_address = os.getenv('NODE_SERVER_ADDRESS')
+
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
@@ -20,6 +22,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.get("/")
+async def root():
+    return {"message": "Hello World"}
 
 @app.post("/parse")
 async def get_image(file: UploadFile = File(...),
@@ -55,7 +61,7 @@ async def get_image(file: UploadFile = File(...),
     
     # send to nextjs api to get job results
     print('sending to nextjs api')
-    response = requests.post('http://localhost:3000/api/search', json={'message': json.dumps({
+    response = requests.post(f'{node_server_address}/api/search', json={'message': json.dumps({
         'skills': resume_json['skills'],
         'languages': resume_json['languages'],
         'experiences': resume_json['experiences'],
