@@ -16,14 +16,14 @@ import { MatchData, PinnedJobs, UserData } from "@/types";
 
 
 export default function Jobs() {
-  const [userData, setUserData] = useState<UserData>(null);
+  const [userData, setUserData] = useState<UserData | null>(null);
   const [topMatches, setTopMatches] = useState<MatchData[]>([]);
   const [targetJobMatches, setTargetJobMatches] = useState<MatchData[]>([]);
-  const [targetJob, setTargetJob] = useState<string>(null);
+  const [targetJob, setTargetJob] = useState<string | null>(null);
   const searchParams = useSearchParams();
   const { isLoaded, isSignedIn, user } = useUser();
   const fileName = searchParams.get("fileName");
-  const [pinnedJobs, setPinnedJobs] = useState<PinnedJobs>(null);
+  const [pinnedJobs, setPinnedJobs] = useState<PinnedJobs | null>(null);
 
   useEffect(() => {
     setTargetJob(localStorage.getItem('targetJob'));
@@ -46,7 +46,9 @@ export default function Jobs() {
   
   useEffect(() => {
     if (targetJob) {
-      setTargetJobMatches(JSON.parse(localStorage.getItem('targetJobMatches')));
+      const targetJobMatchesString = localStorage.getItem('targetJobMatches');
+      const targetJobMatches = JSON.parse(targetJobMatchesString || '[]');
+      setTargetJobMatches(targetJobMatches);
     }
   }, [targetJob]);
 
@@ -58,10 +60,12 @@ export default function Jobs() {
 
   // set pinned jobs
   const updatePinnedJobs = async (pinnedJobs: PinnedJobs) => {
-    const userDocRef = doc(db, 'users', user.id);
-    await updateDoc(userDocRef, {
-      pinnedJobs: pinnedJobs
-    });
+    if (isLoaded && isSignedIn && user) {
+      const userDocRef = doc(db, 'users', user.id);
+      await updateDoc(userDocRef, {
+        pinnedJobs: pinnedJobs
+      });
+    }
   }
 
   const togglePinned = async (jobId: string, jobTitle: string) => {

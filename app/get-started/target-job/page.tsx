@@ -1,6 +1,6 @@
 'use client'
 import { Button, buttonVariants } from "@/components/ui/button";
-import Loader from '@/components/loader'
+import Loader from '@/components/Loader'
 import { Header } from '@/components/ui/Header'
 import { Input } from '@/components/ui/input'
 import { db } from '@/firebase'
@@ -23,6 +23,10 @@ const TargetJobPage = () => {
     localStorage.setItem('targetJob', targetJob);
     if (targetJob.length === 0) {
       alert('Please enter a job title');
+      return;
+    }
+    if (!isLoaded || !isSignedIn) {
+      alert('Please sign in to continue');
       return;
     }
     setIsTargetJobSubmitted(true);

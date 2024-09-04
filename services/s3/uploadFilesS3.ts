@@ -4,7 +4,7 @@ import { createFolderIfNotExist } from "./createFolderIfNotExist";
 
 const uploadFilesS3 = async (directory: string, fileName: string, files: File[]) => {
   try {
-    const bucket = process.env.S3_BUCKET;
+    const bucket = process.env.S3_BUCKET as string;
     await createFolderIfNotExist(bucket, directory);
     
     const responses = await Promise.all(
@@ -29,7 +29,7 @@ const uploadFilesS3 = async (directory: string, fileName: string, files: File[])
 
     return responses;
   }
-  catch (error) {
+  catch (error: any) {
     console.error('Error handling request:', error);
     return { error: error.message };
   }

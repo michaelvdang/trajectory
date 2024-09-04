@@ -1,3 +1,4 @@
+
 export interface UserData {
   languages: string[];
   skills: string[];
@@ -7,6 +8,8 @@ export interface UserData {
   projects: string[];
   certifications: string[];
 }
+
+export type UserDataKey = keyof UserData;
 
 export interface MatchData {
   id: string;

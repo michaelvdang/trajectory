@@ -8,13 +8,19 @@ import { doc } from "firebase/firestore";
 import generateSkillAssessments from "@/services/generateSkillAssessments";
 import { MatchData } from "@/types";
 
-const MODE = process.env.MODE;
+const MODE = process.env.MODE as 'dev' | 'prod' | undefined;
 console.log('mode: ', MODE);
-const ADDRESSES = {
+const ADDRESSES: Record<'dev' | 'prod', string | undefined>  = {
   'dev': process.env.DEV_PYTHON_SERVER_ADDRESS,
   'prod': process.env.PROD_PYTHON_SERVER_ADDRESS,
 }
 console.log('ADDRESSES: ', ADDRESSES);
+
+// Validate MODE and provide a default address if MODE is invalid
+if (!MODE || !ADDRESSES[MODE]) {
+  console.error(`Invalid or missing MODE environment variable. Defaulting to 'dev'.`);
+}
+
 const PYTHON_SERVER_ADDRESS = ADDRESSES[MODE || 'dev'];
 console.log('using PYTHON_SERVER_ADDRESS: ', PYTHON_SERVER_ADDRESS);
 

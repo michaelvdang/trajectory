@@ -1,14 +1,15 @@
 import generateEmbeddings from "@/services/generateEmbeddings";
 import queryPinecone from "@/services/queryPinecone";
+// import { NextRequest } from "next/server";
 
-export async function GET(request) {
+export async function GET(request: Request) {
   return new Response('Hello, Next.js!')
 }
 
 // take input from resume parser
 // search pinecone for similar jobs 
 // return embeddings of similar jobs along with metadata with job titles
-export async function POST(request) {
+export async function POST(request: Request) {
   try {
     
     // const data = await request.json()

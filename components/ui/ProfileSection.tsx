@@ -4,7 +4,7 @@ import { Button } from "./button";
 
 interface ProfileSectionProps {
   title: string;
-  items: string[];
+  items: string[] | null;
   callback: (items: string[]) => void;
 }
 
@@ -17,9 +17,11 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({ title, items = [], call
   };
 
   const handleSaveClick = async () => {
-    setIsEditing(false);
-    let trimmedEditedItems = editedItems.filter((item) => item.trim() !== "");
-    callback(trimmedEditedItems);
+    if (editedItems) {
+      setIsEditing(false);
+      let trimmedEditedItems = editedItems.filter((item) => item.trim() !== "");
+      callback(trimmedEditedItems);
+    }
   };
 
   const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -43,7 +45,7 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({ title, items = [], call
       {isEditing ? (
         <textarea
           className="w-full mt-2 p-2 border rounded"
-          value={editedItems.join("\n")}
+          value={(editedItems || []).join("\n")}
           onChange={handleTextareaChange}
           rows={10}
         />
