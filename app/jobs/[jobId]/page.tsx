@@ -10,35 +10,39 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
 const JobPage = ({params} : {params: {jobId: string}}) => {
-  const [userData, setUserData] = useState<UserData>(null);
+  const [userData, setUserData] = useState<UserData | null>(null);
   const [topMatches, setTopMatches] = useState<MatchData[]>([]);
   const [targetJobMatches, setTargetJobMatches] = useState<MatchData[]>([]);
-  const [targetJob, setTargetJob] = useState<string>(null);
+  const [targetJob, setTargetJob] = useState<string | null>(null);
   const { isLoaded, isSignedIn, user } = useUser();
-  const [jobData, setJobData] = useState<JobData>(null);
+  const [jobData, setJobData] = useState<JobData | null>(null);
   const jobId = params.jobId;
-  const [skillAssessments, setSkillAssessments] = useState<SkillAssessments>(null);
+  const [skillAssessments, setSkillAssessments] = useState<SkillAssessments | null>(null);
 
   const router = useRouter();
 
   useEffect(() => {
     setTargetJob(localStorage.getItem('targetJob'));
 
-    const targetJobMatches : MatchData[] = JSON.parse(localStorage.getItem('targetJobMatches'));
-      setTargetJobMatches(targetJobMatches);
-      const topMatches : MatchData[] = JSON.parse(localStorage.getItem('topMatches'));
-      setTopMatches(topMatches);
-      // check if job is in localstorage
-      let allMatches = [];
-      allMatches.push(...(targetJobMatches ?? []));
-      allMatches.push(...(topMatches ?? []));
-      const job = allMatches?.find((match : MatchData) => match.id === jobId);
-      if (job) {
-        setJobData(job);
-      }
-      else {
-        getJobDetails();
-      }
+    const targetJobMatchesString = localStorage.getItem('targetJobMatches');
+
+    const targetJobMatches: MatchData[] = targetJobMatchesString ? JSON.parse(targetJobMatchesString) : [];
+    setTargetJobMatches(targetJobMatches);
+
+    const topMatchesString = localStorage.getItem('topMatches');
+    const topMatches: MatchData[] = topMatchesString ? JSON.parse(topMatchesString) : [];
+    setTopMatches(topMatches);
+    // check if job is in localstorage
+    let allMatches = [];
+    allMatches.push(...(targetJobMatches ?? []));
+    allMatches.push(...(topMatches ?? []));
+    const job = allMatches?.find((match : MatchData) => match.id === jobId);
+    if (job) {
+      setJobData(job);
+    }
+    else {
+      getJobDetails();
+    }
   }, [jobId]);
 
   const getJobDetails = async () => {
@@ -72,9 +76,10 @@ const JobPage = ({params} : {params: {jobId: string}}) => {
     
   useEffect(() => {
     if (isLoaded) {
-      if (!isSignedIn) {
+      if (!user) {
         alert('Please sign in first. You will now be redirected to the home page.');
         router.push('/');
+        return
       }
       const userDocRef = doc(db, 'users', user.id);
       const unsubscribe = onSnapshot(userDocRef, (doc) => {
@@ -94,71 +99,76 @@ const JobPage = ({params} : {params: {jobId: string}}) => {
   // get user skills assessments, default to 1 if not in firestore
   useEffect(() => {
     const getMissingSkillAssessments = async () => {
-      try {
-        // get all skills assessments from fire store
-        const userDocRef = doc(db, 'users', user.id);
-        const userDocSnap = await getDoc(userDocRef);
-        if (userDocSnap.exists()) {
-          const data = userDocSnap.data();
-          if (!data.assessments) {
-            data.assessments = {};
-          }
-          console.log('getSkillAssessments skillAssessments: ', data.assessments);
-          // find skills in jobData.skills that are not in firestore
-          const currentAssessments : SkillAssessments = data.assessments;
-          console.log('getSkillAssessments assessments: ', currentAssessments);
-          // console.log('getSkillAssessments assessments["AWS"]: ', currentAssessments["AWS"]);
-          const missingSkills = jobData.skills.filter((skill) => !(skill in currentAssessments));
-          // setMissingSkillAssessments(missingSkills);
-          console.log('getSkillAssessments missingSkills: ', missingSkills);
-          if (missingSkills.length > 0) {
-            // if missingSkills.length > 0, fetch userData from firestore
-            const userData = data.userData;
-            // send userData, missingSkills to createSkillAssessment endpoint 
-            const response = await axios.post(
-              `/api/createAssessments`,
-              {
-                userData,
-                missingSkills,
-              }
-            )
-            const missingSkillAssessments = response.data.assessments;
-            console.log('getSkillAssessments missingSkillAssessments: ', response.data.assessments);
-            // store returned assessments in firestore
-            const batch = writeBatch(db)
-            for (const [skill, score] of missingSkillAssessments) {
-              console.log("skill score", skill, score);
-              const assessment : SkillAssessment = {
-                name: skill,
-                score,
-                status: score > 3 ? 'complete' : 'incomplete',
-              }
-              batch.set(userDocRef, {assessments: {[skill]: assessment}}, { merge: true });
-              currentAssessments[skill] = assessment;
+      if (isLoaded && isSignedIn && user && jobData) {
+        try {
+          
+          // get all skills assessments from fire store
+          const userDocRef = doc(db, 'users', user.id);
+          const userDocSnap = await getDoc(userDocRef);
+          if (userDocSnap.exists()) {
+            const data = userDocSnap.data();
+            if (!data.assessments) {
+              data.assessments = {};
             }
-            await batch.commit();
-            // set skillAssessments
-            console.log('getSkillAssessments currentAssessments: ', currentAssessments);
+            console.log('getSkillAssessments skillAssessments: ', data.assessments);
+            // find skills in jobData.skills that are not in firestore
+            const currentAssessments : SkillAssessments = data.assessments;
+            console.log('getSkillAssessments assessments: ', currentAssessments);
+            // console.log('getSkillAssessments assessments["AWS"]: ', currentAssessments["AWS"]);
+            const missingSkills = jobData.skills.filter((skill) => !(skill in currentAssessments));
+            // setMissingSkillAssessments(missingSkills);
+            console.log('getSkillAssessments missingSkills: ', missingSkills);
+            if (missingSkills && missingSkills.length > 0) {
+              // if missingSkills.length > 0, fetch userData from firestore
+              const userData = data.userData;
+              // send userData, missingSkills to createSkillAssessment endpoint 
+              const response = await axios.post(
+                `/api/createAssessments`,
+                {
+                  userData,
+                  missingSkills,
+                }
+              )
+              const missingSkillAssessments = response.data.assessments;
+              console.log('getSkillAssessments missingSkillAssessments: ', response.data.assessments);
+              // store returned assessments in firestore
+              const batch = writeBatch(db)
+              for (const [skill, score] of missingSkillAssessments) {
+                console.log("skill score", skill, score);
+                const assessment : SkillAssessment = {
+                  name: skill,
+                  score,
+                  status: score > 3 ? 'complete' : 'incomplete',
+                }
+                batch.set(userDocRef, {assessments: {[skill]: assessment}}, { merge: true });
+                currentAssessments[skill] = assessment;
+              }
+              await batch.commit();
+              // set skillAssessments
+              console.log('getSkillAssessments currentAssessments: ', currentAssessments);
+            }
+            setSkillAssessments(currentAssessments);
           }
-          setSkillAssessments(currentAssessments);
+        }
+        catch (error) {
+          console.log('getSkillAssessments error: ', error);
         }
       }
-      catch (error) {
-        console.log('getSkillAssessments error: ', error);
-      }
     }
-    if (isLoaded && isSignedIn && jobData && jobData.skills.length > 0) {
+    // if (isLoaded && isSignedIn && jobData && jobData.skills.length > 0) {
       getMissingSkillAssessments();
-    }
+    // }
   }, [isLoaded, isSignedIn, user, jobData]);
 
   const toggleSkillStatus = async (skill: string) => {
-    if (skill in skillAssessments) {
-      const newAssessments = { ...skillAssessments };
-      newAssessments[skill].status = newAssessments[skill].status === 'incomplete' ? 'complete' : 'incomplete';
-      setSkillAssessments(newAssessments);
-      const userDocRef = doc(db, 'users', user.id);
-      await updateDoc(userDocRef, { assessments: newAssessments });
+    if (isLoaded && isSignedIn && user) {
+      if (skillAssessments && skill in skillAssessments) {
+        const newAssessments = { ...skillAssessments };
+        newAssessments[skill].status = newAssessments[skill].status === 'incomplete' ? 'complete' : 'incomplete';
+        setSkillAssessments(newAssessments);
+        const userDocRef = doc(db, 'users', user.id);
+        await updateDoc(userDocRef, { assessments: newAssessments });
+      }
     }
   }
 

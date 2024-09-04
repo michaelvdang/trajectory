@@ -9,17 +9,18 @@ import { useUser } from "@clerk/nextjs";
 import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase";
 import { setUserId } from "firebase/analytics";
-import { PinnedJobs, UserData } from "@/types";
+import { PinnedJobs, UserData, UserDataKey } from "@/types";
 import { JobCard } from "@/components/ui/JobCard";
 import './styles.css';
+import { Loader } from "lucide-react";
 
 export default function UserProfile() {
   const [userData, setUserData] = useState<UserData | null>(null);
   const [loading, setLoading] = useState(true);
   const searchParams = useSearchParams();
   const { isLoaded, isSignedIn, user } = useUser();
-  const [targetJob, setTargetJob] = useState<string[]>(null);
-  const [pinnedJobs, setPinnedJobs] = useState<PinnedJobs>(null);
+  const [targetJob, setTargetJob] = useState<string[] | null>(null);
+  const [pinnedJobs, setPinnedJobs] = useState<PinnedJobs | null>(null);
 
   useEffect(() => {
     if (isLoaded && isSignedIn) {
@@ -59,14 +60,19 @@ export default function UserProfile() {
     return <div>Missing userId parameter</div>;
   }
 
-  const handleUserDataCallBack = async (field: string, items: string[]) => {
-    console.log("field: ", field);
-    console.log("items: ", items);
-    userData[field] = items;
-    console.log("userData: ", userData);
-    const userId = user.id;
-    const userDocRef = doc(db, "users", userId);
-    await updateDoc(userDocRef, { userData });
+  const handleUserDataCallBack = async (field: UserDataKey, items: string[]) => {
+    if (userData) {
+      console.log("field: ", field);
+      console.log("items: ", items);
+      userData[field] = items;
+      console.log("userData: ", userData);
+      const userId = user.id;
+      const userDocRef = doc(db, "users", userId);
+      await updateDoc(userDocRef, { userData });
+    }
+    else {
+      console.error("userData is null or undefined");
+    }
   };
 
   const handleTargetJobCallback = async (items: string[]) => {
@@ -157,18 +163,24 @@ export default function UserProfile() {
             </h2>
           </div>
           <div className="mx-auto p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <ProfileSection title="Career Goals" items={targetJob} callback={(items) => handleTargetJobCallback(items)} />
-              <ProfileSection title="Languages" items={userData.languages} callback={(items) => handleUserDataCallBack('languages', items)} />
-              <ProfileSection title="Skills" items={userData.skills} callback={(items) => handleUserDataCallBack('skills', items)} />
-            </div>
-            <div>
-              <ProfileSection title="Experience" items={userData.experience} callback={(items) => handleUserDataCallBack('expriences', items)} />
-              <ProfileSection title="Education" items={userData.education} callback={(items) => handleUserDataCallBack('education', items)} />
-              <ProfileSection title="Activities" items={userData.activities} callback={(items) => handleUserDataCallBack('activities', items)} />
-              <ProfileSection title="Projects" items={userData.projects} callback={(items) => handleUserDataCallBack('projects',items)} />
-              <ProfileSection title="Certifications" items={userData.certifications} callback={(items) => handleUserDataCallBack('certifications', items)} />
-            </div>
+            {userData ? (
+            <>
+              <div>
+                <ProfileSection title="Career Goals" items={targetJob} callback={(items) => handleTargetJobCallback(items)} />
+                <ProfileSection title="Languages" items={userData.languages} callback={(items) => handleUserDataCallBack('languages', items)} />
+                <ProfileSection title="Skills" items={userData.skills} callback={(items) => handleUserDataCallBack('skills', items)} />
+              </div>
+              <div>
+                <ProfileSection title="Experience" items={userData.experience} callback={(items) => handleUserDataCallBack('experience', items)} />
+                <ProfileSection title="Education" items={userData.education} callback={(items) => handleUserDataCallBack('education', items)} />
+                <ProfileSection title="Activities" items={userData.activities} callback={(items) => handleUserDataCallBack('activities', items)} />
+                <ProfileSection title="Projects" items={userData.projects} callback={(items) => handleUserDataCallBack('projects',items)} />
+                <ProfileSection title="Certifications" items={userData.certifications} callback={(items) => handleUserDataCallBack('certifications', items)} />
+              </div>
+            </>
+            ) : (
+              <Loader />
+            )}
           </div>
         </div>
       </div>

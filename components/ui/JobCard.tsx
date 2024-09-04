@@ -26,7 +26,7 @@ export const JobCard: React.FC<JobCardProps> = ({
   togglePinned,
 }) => {
 
-  const handleTogglePinned = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleTogglePinned = (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
     e.preventDefault();
     e.stopPropagation();
     togglePinned(jobId, jobTitle);

@@ -1,5 +1,5 @@
 'use client';
-import { HeadComp } from "@/components/HeadComp";
+// import { HeadComp } from "@/components/HeadComp";
 {/*
 import React, { useState } from 'react';
 import Image from 'next/image';

@@ -9,7 +9,7 @@ if (!apiKey) {
   throw new Error('PINECONE_API_KEY is not defined in the environment variables.');
 }
 
-const queryPinecone = async (embedding, topK = 3) => {
+const queryPinecone = async (embedding: number[], topK: number = 3) => {
   // get similar jobs from pinecone
   const pc = new Pinecone({ apiKey });
   const index = pc.index('trajectory-app');

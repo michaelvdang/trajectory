@@ -17,7 +17,7 @@ export const JobGrid: React.FC = () => (
   >
     {/* Job cards grid */}
     <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 py-20 ">
-      {jobData.map((job, index) => (
+      {/* {jobData.map((job, index) => (
         <JobCard
           key={index}
           jobTitle={job.jobTitle}
@@ -26,7 +26,7 @@ export const JobGrid: React.FC = () => (
           salary={job.salary}
           difficulty={job.difficulty}
         />
-      ))}
+      ))} */}
     </div>
   </section>
 );

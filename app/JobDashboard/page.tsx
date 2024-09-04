@@ -24,7 +24,7 @@ export default function Home() {
   const completedTasks = tasks.filter((task) => task.status === "complete").length;
   const progress = (completedTasks / tasks.length) * 100;
 
-  const toggleTaskStatus = (id) => {
+  const toggleTaskStatus = (id: number) => {
     setTasks(
       tasks.map((task) =>
         task.id === id

@@ -1,3 +1,4 @@
+import { UserData } from '@/types';
 import OpenAI from 'openai';
 
 const openai = new OpenAI({
@@ -6,7 +7,7 @@ const openai = new OpenAI({
 
 type SkillAssessment = [string, number]
 
-async function generateSkillAssessments(userData, jobSkills)
+async function generateSkillAssessments(userData: UserData, jobSkills: string[])
 : Promise<SkillAssessment[]>  
 {
 
@@ -31,6 +32,9 @@ async function generateSkillAssessments(userData, jobSkills)
   });
   const content = completion.choices[0].message.content;
   console.log("content", content);
+  if (!content) {
+    return [];
+  }
   const assessments = JSON.parse(content);
   console.log("content", content);
 
