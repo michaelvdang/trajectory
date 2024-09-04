@@ -5,10 +5,10 @@ import { Button } from "./button";
 interface ProfileSectionProps {
   title: string;
   items: string[];
-  userId: string;
+  callback: (items: string[]) => void;
 }
 
-const ProfileSection: React.FC<ProfileSectionProps> = ({ title, items = [], userId }) => {
+const ProfileSection: React.FC<ProfileSectionProps> = ({ title, items = [], callback }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedItems, setEditedItems] = useState(items);
 
@@ -18,24 +18,8 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({ title, items = [], user
 
   const handleSaveClick = async () => {
     setIsEditing(false);
-
-    try {
-      const response = await fetch(`/api/user?userId=${userId}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ [title.toLowerCase()]: editedItems }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to update user data");
-      }
-
-      console.log("User data updated successfully");
-    } catch (error) {
-      console.error("Error updating user data: ", error);
-    }
+    let trimmedEditedItems = editedItems.filter((item) => item.trim() !== "");
+    callback(trimmedEditedItems);
   };
 
   const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {

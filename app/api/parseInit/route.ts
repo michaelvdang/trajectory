@@ -7,10 +7,6 @@ import admin from '@/firebaseAdmin';
 import { doc } from "firebase/firestore";
 import generateSkillAssessments from "@/services/generateSkillAssessments";
 
-interface SkillAssessment {
-  [key: string]: number;
-}
-
 const Bucket = process.env.S3_BUCKET;
 
 // download the file from s3 to next server, then send the file to localhost:8000
@@ -61,55 +57,6 @@ export async function POST (
     const userDocRef = admin.firestore().doc('users/' + userId);
     await userDocRef.set({userData, topMatches}, { merge: true });
 
-    // get userData (languages, skills, experience, education, activities, projects, certifications) from parseResponse.data.userData and ask gpt to assess proficiency level to each job skill
-    // get set of all job skills required from parseResponse.data.topMatches
-    const jobSkills = []
-    for (let i = 0; i < topMatches.length; i++) {
-      for (let j = 0; j < topMatches[i].skills.length; j++) {
-        jobSkills.push(topMatches[i].skills[j]);
-      }
-    }
-
-
-    // move to new endpoint and let client send userData and jobSkills to generate assessments when landing on jobId page
-
-    // have gpt assess user skills on each job skill based on userData
-    const assessments = await generateSkillAssessments(userData, jobSkills); 
-
-    // // store proficiency level in firestore under assessments collection, each skill is a doc with skill name
-    // const userDocRef = admin.firestore().doc(`users/${userId}`);
-    const batch = admin.firestore().batch();
-    assessments.forEach(assessment => {
-      // remove / and : from skill
-      // const key = assessment[0].replace(/:/g, '').replace(/\//g, '');
-      const data = {assessments: {
-        [assessment[0]]: assessment[1]
-      }};
-      batch.set(userDocRef, data, { merge: true });
-    })
-    
-    // const assessmentsColRef = admin.firestore().collection(`users/${userId}/assessments`);
-    // // const batch = admin.firestore().batch();
-    // assessments.forEach(assessment => {
-    //   // remove / and : from skill
-    //   const key = assessment[0].replace(/:/g, '').replace(/\//g, '');
-    //   const docRef = assessmentsColRef.doc(key);
-    //   const data = {score: assessment[1]};
-    
-    //   batch.set(docRef, data, { merge: true });
-    // });
-
-    await batch.commit();
-
-
-
-
-
-
-
-    // user selects job, get job skills required
-    // on client: redirect to job/[jobId] page to display job skills and current skills, send userId to get skills proficiency level and contrast with job skills
-    
     return NextResponse.json({ ...parseResponse.data });
   }
   catch (error) {

@@ -42,6 +42,12 @@ export const Header = () => {
             Dashboard
           </Link>
           <Link
+            href="/profile"
+            className="nav-item text-violet-900 hover:text-gray-600"
+          >
+            Profile
+          </Link>
+          <Link
             href="/get-started/upload"
             className="nav-item bg-white text-gray-900 hover:bg-violet-500/30 hover:text-gray-600"
           >

@@ -30,7 +30,9 @@ async function generateSkillAssessments(userData, jobSkills)
     ],
   });
   const content = completion.choices[0].message.content;
+  console.log("content", content);
   const assessments = JSON.parse(content);
+  console.log("content", content);
 
   return assessments;
 }

@@ -5,63 +5,47 @@ import { useSearchParams } from "next/navigation";
 import Profile from "@/components/Profile";
 import { Header } from "@/components/ui/Header";
 import ProfileSection from "@/components/ui/ProfileSection";
-
-interface User {
-  targetJob: string;
-  languages: string[];
-  skills: string[];
-  experience: string[];
-  education: string[];
-  activities: string[];
-  projects: string[];
-  certifications: string[];
-}
+import { useUser } from "@clerk/nextjs";
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { db } from "@/firebase";
+import { setUserId } from "firebase/analytics";
+import { PinnedJobs, UserData } from "@/types";
+import { JobCard } from "@/components/ui/JobCard";
+import './styles.css';
 
 export default function UserProfile() {
-  const [user, setUser] = useState<User | null>(null);
+  const [userData, setUserData] = useState<UserData | null>(null);
   const [loading, setLoading] = useState(true);
   const searchParams = useSearchParams();
-  const userId = searchParams.get("userId");
+  const { isLoaded, isSignedIn, user } = useUser();
+  const [targetJob, setTargetJob] = useState<string[]>(null);
+  const [pinnedJobs, setPinnedJobs] = useState<PinnedJobs>(null);
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      if (userId) {
-        try {
-          const response = await fetch(`/api/user?userId=${userId}`, {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          });
+    if (isLoaded && isSignedIn) {
+      // fetch user data from firestore
+      const fetchUserData = async () => {
+        const userDocRef = doc(db, "users", user.id);
+        const userDocSnap = await getDoc(userDocRef);
 
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-
-          const data = await response.json();
-          console.log("data: ", data);
-
-          if (data) {
-            const userData: User = {
-              targetJob: data.targetJob,
-              ...data, // Assuming the rest of the fields are directly in the response
-            };
-            setUser(userData);
-          } else {
-            setUser(null);
-            console.log("User not found");
-          }
-        } catch (error) {
-          console.error("Error fetching user data: ", error);
-          setUser(null);
-        } finally {
+        if (userDocSnap.exists()) {
+          const userData = userDocSnap.data().userData as UserData;
+          setUserData(userData);
+          setTargetJob(userDocSnap.data().targetJob);
+          console.log('userdocksnap.data(): ', userDocSnap.data());
+          setLoading(false);
+          setPinnedJobs(userDocSnap.data().pinnedJobs);
+        }
+        else {
+          setDoc(userDocRef, { userData: {} });
+          alert('Your profile has no data yet. Please upload a resume or fill out the applicable fields.');
           setLoading(false);
         }
-      }
-    };
+      };
 
-    fetchUserData();
-  }, [userId]);
+      fetchUserData();
+    }
+  }, [isLoaded, isSignedIn, user]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -71,26 +55,120 @@ export default function UserProfile() {
     return <div>User not found</div>;
   }
 
-  if (!userId) {
+  if (!user.id) {
     return <div>Missing userId parameter</div>;
+  }
+
+  const handleUserDataCallBack = async (field: string, items: string[]) => {
+    console.log("field: ", field);
+    console.log("items: ", items);
+    userData[field] = items;
+    console.log("userData: ", userData);
+    const userId = user.id;
+    const userDocRef = doc(db, "users", userId);
+    await updateDoc(userDocRef, { userData });
+  };
+
+  const handleTargetJobCallback = async (items: string[]) => {
+    setTargetJob(items);
+    const userId = user.id;
+    const userDocRef = doc(db, "users", userId);
+    await updateDoc(userDocRef, { targetJob: items });
+  };
+
+  // set pinned jobs
+  const updatePinnedJobs = async (pinnedJobs: PinnedJobs) => {
+    const userDocRef = doc(db, 'users', user.id);
+    await updateDoc(userDocRef, {
+      pinnedJobs: pinnedJobs
+    });
+  }
+
+  const togglePinned = async (jobId: string, jobTitle: string) => {
+    const newPinnedJobs = { ...pinnedJobs };
+    if (newPinnedJobs[jobId]) {
+      delete newPinnedJobs[jobId];
+    } else {
+      newPinnedJobs[jobId] = { id: jobId, title: jobTitle, pinned: true };
+    }
+    setPinnedJobs(newPinnedJobs);
+    updatePinnedJobs(newPinnedJobs);
   }
 
   return (
     <>
       <Header />
-      <div className="py-24 relative z-0 overflow-x-clip">
-        <div className="container mx-auto p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <ProfileSection title="Target Job" items={[user.targetJob]} userId={userId} />
-            <ProfileSection title="Languages" items={user.languages} userId={userId} />
-            <ProfileSection title="Skills" items={user.skills} userId={userId} />
+      <div className="max-w-5xl mx-auto py-24 relative z-0 overflow-x-clip">
+
+        {/* Pinned jobs section  */}
+        <div 
+          
+        >
+          <div
+            className="flex justify-center"
+          >
+            <h2
+              className="text-3xl font-bold mb-4"
+            >
+              Pinned Jobs
+            </h2>
           </div>
-          <div>
-            <ProfileSection title="Experience" items={user.experience} userId={userId} />
-            <ProfileSection title="Education" items={user.education} userId={userId} />
-            <ProfileSection title="Activities" items={user.activities} userId={userId} />
-            <ProfileSection title="Projects" items={user.projects} userId={userId} />
-            <ProfileSection title="Certifications" items={user.certifications} userId={userId} />
+          <div className="mx-auto p-4 flex">
+            <div className="w-full flex flex-wrap gap-x-4">
+              {pinnedJobs ? (
+                Object.entries(pinnedJobs).map(([id, pinned]) => (
+                  <div
+                    key={id}
+                    className="card-container w-full  mb-4 "
+                  >
+                    <JobCard
+                      key={id}
+                      jobId={id}
+                      jobTitle={pinned.title}
+                      // jobDescription={job.description || "No description available"}
+                      // timeline={job.timeline || "No timeline available"}
+                      // salary={job.salary || "No salary available"}
+                      // difficulty={"No difficulty available"}
+                      pinned={pinnedJobs && pinnedJobs[pinned.id] ? true : false}
+                      togglePinned={togglePinned}
+                    />
+                  </div>
+                ))
+              ) : (
+                <p className="text-center">No pinned jobs</p>
+              )}
+              {/* <ProfileSection title="Jobs" items={targetJob} callback={(items) => handleTargetJobCallback(items)} /> */}
+            </div>
+          </div>
+        </div>
+
+        
+        {/* Profile section  */}
+        <div 
+          
+        >
+          <div
+            className="flex justify-center"
+          >
+            <h2
+              className="text-3xl font-bold mb-4"
+            >
+              Your Profile
+            </h2>
+          </div>
+          <div className="mx-auto p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <ProfileSection title="Career Goals" items={targetJob} callback={(items) => handleTargetJobCallback(items)} />
+              <ProfileSection title="Languages" items={userData.languages} callback={(items) => handleUserDataCallBack('languages', items)} />
+              <ProfileSection title="Skills" items={userData.skills} callback={(items) => handleUserDataCallBack('skills', items)} />
+            </div>
+            <div>
+              <ProfileSection title="Experience" items={userData.experience} callback={(items) => handleUserDataCallBack('expriences', items)} />
+              <ProfileSection title="Education" items={userData.education} callback={(items) => handleUserDataCallBack('education', items)} />
+              <ProfileSection title="Activities" items={userData.activities} callback={(items) => handleUserDataCallBack('activities', items)} />
+              <ProfileSection title="Projects" items={userData.projects} callback={(items) => handleUserDataCallBack('projects',items)} />
+              <ProfileSection title="Certifications" items={userData.certifications} callback={(items) => handleUserDataCallBack('certifications', items)} />
+            </div>
           </div>
         </div>
       </div>

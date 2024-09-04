@@ -29,9 +29,21 @@ export interface JobData {
   location: string;
 }
 
-// export interface SkillAssessment {
-//   name: string;
-//   score: number;
-// }
+export interface SkillAssessment {
+  name: string;
+  score: number;
+  status: string;
+}
 
-export type SkillAssessments = Record<string, number>;
+// export type SkillAssessments = Record<string, number>;
+export type SkillAssessments = Record<string, SkillAssessment>;
+
+interface PinnedJob {
+  id: string;
+  title: string;
+  pinned: boolean;
+}
+
+export interface PinnedJobs {
+  [key: string]: PinnedJob
+}

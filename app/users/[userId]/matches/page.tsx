@@ -9,9 +9,11 @@ import axios from "axios";
 import { JobGrid } from "@/components/ui/JobGrid";
 import { JobCard } from "@/components/ui/JobCard";
 import { db } from "@/firebase";
-import { doc, onSnapshot } from "firebase/firestore";
+import { doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { Header } from "@/components/ui/Header";
-import { MatchData, UserData } from "@/types";
+import { MatchData, PinnedJobs, UserData } from "@/types";
+
+
 
 export default function Jobs() {
   const [userData, setUserData] = useState<UserData>(null);
@@ -21,6 +23,7 @@ export default function Jobs() {
   const searchParams = useSearchParams();
   const { isLoaded, isSignedIn, user } = useUser();
   const fileName = searchParams.get("fileName");
+  const [pinnedJobs, setPinnedJobs] = useState<PinnedJobs>(null);
 
   useEffect(() => {
     setTargetJob(localStorage.getItem('targetJob'));
@@ -34,6 +37,7 @@ export default function Jobs() {
           const data = doc.data();
           setUserData(data.userData);
           setTopMatches(data.topMatches);
+          setPinnedJobs(data.pinnedJobs);
         }
       });
       return () => unsubscribe();
@@ -51,6 +55,25 @@ export default function Jobs() {
       localStorage.setItem('topMatches', JSON.stringify(topMatches));
     }
   }, [topMatches]);
+
+  // set pinned jobs
+  const updatePinnedJobs = async (pinnedJobs: PinnedJobs) => {
+    const userDocRef = doc(db, 'users', user.id);
+    await updateDoc(userDocRef, {
+      pinnedJobs: pinnedJobs
+    });
+  }
+
+  const togglePinned = async (jobId: string, jobTitle: string) => {
+    const newPinnedJobs = { ...pinnedJobs };
+    if (newPinnedJobs[jobId]) {
+      delete newPinnedJobs[jobId];
+    } else {
+      newPinnedJobs[jobId] = { id: jobId, title: jobTitle, pinned: true };
+    }
+    setPinnedJobs(newPinnedJobs);
+    updatePinnedJobs(newPinnedJobs);
+  }
   
   const Loading = () => {
     return (
@@ -101,8 +124,8 @@ export default function Jobs() {
                 timeline={job.timeline || "No timeline available"}
                 salary={job.salary || "No salary available"}
                 difficulty={"No difficulty available"}
-                // skills={job.skills}
-                // score={job.score}
+                pinned={pinnedJobs && pinnedJobs[job.id] ? true : false}
+                togglePinned={togglePinned}
               />
             ))
           )}
@@ -125,6 +148,8 @@ export default function Jobs() {
                 difficulty={"No difficulty available"}
                 // skills={job.skills}
                 // score={job.score}
+                pinned={pinnedJobs && pinnedJobs[job.id] ? true : false}
+                togglePinned={togglePinned}
               />
             ))
           ) : (
