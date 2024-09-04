@@ -6,9 +6,11 @@ import ballImage from '@/assets/images/ball.png';
 import textLogo from '@/assets/images/TRAJECTORY__4_-removebg-preview.png';
 import { buttonVariants } from './button';
 import Link from 'next/link';
+import { Footer } from '@/components/ui/Footer';
 
 export const Hero = () => {
   return (
+    <>
     <div className="relative py-48 md:py-48 lg:py-48 overflow-hidden"> {/* Reduced height */}
       <div
         className="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_70%,transparent),linear-gradient(to_top,transparent,black_10%,black_70%,transparent)] z-0 max-w-full mx-auto scale-110"> {/* Added scale-110 */}
@@ -67,5 +69,7 @@ export const Hero = () => {
         </div>
       </div>
     </div>
+    <Footer />
+    </>
   );
 };
