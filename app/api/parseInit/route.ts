@@ -6,13 +6,17 @@ import { NextRequest, NextResponse } from "next/server";
 import admin from '@/firebaseAdmin';
 import { doc } from "firebase/firestore";
 import generateSkillAssessments from "@/services/generateSkillAssessments";
+import { MatchData } from "@/types";
 
 const MODE = process.env.MODE;
+console.log('mode: ', MODE);
 const ADDRESSES = {
   'dev': process.env.DEV_PYTHON_SERVER_ADDRESS,
-  'prod': process.env.PROD_PYTHON_SERVER_ADDRESS
+  'prod': process.env.PROD_PYTHON_SERVER_ADDRESS,
 }
-const PYTHON_SERVER_ADDRESS = ADDRESSES[MODE];
+console.log('ADDRESSES: ', ADDRESSES);
+const PYTHON_SERVER_ADDRESS = ADDRESSES[MODE || 'dev'];
+console.log('using PYTHON_SERVER_ADDRESS: ', PYTHON_SERVER_ADDRESS);
 
 const Bucket = process.env.S3_BUCKET;
 
@@ -46,25 +50,66 @@ export async function POST (
     const formData = new FormData();
     formData.append('file', blob, fileName); // Attach the file with a filename
     formData.append('directory', userId);  // Attach additional data
-    formData.append('fileName', fileName);         
-    // // Send the file content to localhost:8000
-    const parseResponse = await axios.post(`${PYTHON_SERVER_ADDRESS}parse`, formData, {
+    formData.append('fileName', fileName);
+
+    console.log('${PYTHON_SERVER_ADDRESS}/parse: ', `${PYTHON_SERVER_ADDRESS}/parse`);
+    
+    // // Send the file content to parse service
+    const parseResponse = await axios.post(`${PYTHON_SERVER_ADDRESS}/parse`, formData, {
       headers: {
         'Content-Type': 'application/pdf',
       },
     });
 
-    // console.log('parseResponse.data: ', parseResponse.data);
+    // console.log('parseResponse: ', parseResponse);
+    console.log('parseResponse.data: ', parseResponse.data);
 
     const userData = {...parseResponse.data.userData};
-    const topMatches = parseResponse.data.topMatches;
+
+
+    // // use userData to search for topJobMatches in pinecone
+    const payload = {
+      'skills': userData.skills,
+      'languages': userData.languages,
+      'experiences': userData.experiences,
+      'projects': userData.projects,
+      'certifications': userData.certifications,
+    }
+    const searchResponse = await axios.post('http://localhost:3000/api/search', payload, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    console.log('searchResponse.data.matches;  ', searchResponse.data.matches);
+    const topMatches: MatchData[] = [];
+    for (const match of searchResponse.data.matches) {
+      topMatches.push({
+        id: match.id,
+        title: match.metadata.title,
+        skills: match.metadata.skills,
+        description: match.metadata.description,
+        timeline: match.metadata.timeline,
+        salary: match.metadata.salary,
+        location: match.metadata.location,
+        score: match.score,
+      })
+    }
+    
+    
+    
+    // const topMatches: MatchData[] = 
+
+    
+    
+    // const topMatches: MatchData[] = parseResponse.data.topMatches;
 
     // store languages and skills in firestore
     // store userData and topMatches in firestore, to be retrieved in matches page
     const userDocRef = admin.firestore().doc('users/' + userId);
     await userDocRef.set({userData, topMatches}, { merge: true });
 
-    return NextResponse.json({ ...parseResponse.data });
+    return NextResponse.json({ userData, topMatches });
+    // return NextResponse.json({ ...parseResponse.data });
   }
   catch (error) {
     console.log('error: ', error);

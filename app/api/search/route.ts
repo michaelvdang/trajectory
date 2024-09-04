@@ -10,9 +10,13 @@ export async function GET(request) {
 // return embeddings of similar jobs along with metadata with job titles
 export async function POST(request) {
   try {
-    const data = await request.json()
+    
+    // const data = await request.json()
+    // const input = JSON.parse(data);
 
-    const input = JSON.parse(data.message);
+    const input = await request.json();
+
+    console.log('input: ', input);
     
     // get embedding
     const embedding = await generateEmbeddings(JSON.stringify(input));

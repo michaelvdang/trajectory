@@ -139,7 +139,7 @@ const FileUpload = () => {
       // setTargetJob('devops engineer');
 
     }
-  }, [uploadStatus]);
+  }, [uploadStatus, userId, fileName]);
 
   const handleUpload = async () => {    
     if (!files) return;

@@ -39,7 +39,7 @@ const JobPage = ({params} : {params: {jobId: string}}) => {
       else {
         getJobDetails();
       }
-  }, []);
+  }, [jobId]);
 
   const getJobDetails = async () => {
     try {
@@ -88,7 +88,7 @@ const JobPage = ({params} : {params: {jobId: string}}) => {
       });
       return () => unsubscribe();
     }
-  }, [isLoaded, isSignedIn, user]);
+  }, [isLoaded, isSignedIn, user, router]);
 
   // get job title required skills and experience
   // get user skills assessments, default to 1 if not in firestore

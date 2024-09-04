@@ -12,7 +12,7 @@ import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { MatchData } from "@/types";
 
-const page = () => {
+const TargetJobPage = () => {
   const { isLoaded, isSignedIn, user } = useUser()
   const [targetJob, setTargetJob] = useState<string>('')
   const router = useRouter()
@@ -28,7 +28,8 @@ const page = () => {
     try {
       const response = await axios.post(
         `/api/search`, 
-        { "message": JSON.stringify({targetJob}) }, 
+        {targetJob},
+        // { "message": JSON.stringify({targetJob}) }, 
         { headers: { 'Content-Type': 'application/json' } }
       )
       // store in local storage
@@ -81,7 +82,7 @@ const page = () => {
         className="max-w-7xl w-full flex flex-col items-center "
       >
         <div className="flex justify-center items-center pt-16">
-          <h1 className="text-3xl font-bold mb-4">What's Your 
+          <h1 className="text-3xl font-bold mb-4">What&apos;s Your 
             Dream Job?</h1>
         </div>
         {isTargetJobSubmitted ? (
@@ -126,4 +127,4 @@ const page = () => {
   )
 }
 
-export default page
+export default TargetJobPage
