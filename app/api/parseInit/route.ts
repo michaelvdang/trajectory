@@ -7,6 +7,13 @@ import admin from '@/firebaseAdmin';
 import { doc } from "firebase/firestore";
 import generateSkillAssessments from "@/services/generateSkillAssessments";
 
+const MODE = process.env.MODE;
+const ADDRESSES = {
+  'dev': process.env.DEV_PYTHON_SERVER_ADDRESS,
+  'prod': process.env.PROD_PYTHON_SERVER_ADDRESS
+}
+const PYTHON_SERVER_ADDRESS = ADDRESSES[MODE];
+
 const Bucket = process.env.S3_BUCKET;
 
 // download the file from s3 to next server, then send the file to localhost:8000
@@ -41,7 +48,7 @@ export async function POST (
     formData.append('directory', userId);  // Attach additional data
     formData.append('fileName', fileName);         
     // // Send the file content to localhost:8000
-    const parseResponse = await axios.post('http://localhost:8000/parse', formData, {
+    const parseResponse = await axios.post(`${PYTHON_SERVER_ADDRESS}parse`, formData, {
       headers: {
         'Content-Type': 'application/pdf',
       },

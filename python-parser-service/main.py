@@ -12,7 +12,15 @@ import os
 
 load_dotenv()
 
-node_server_address = os.getenv('NODE_SERVER_ADDRESS')
+mode = os.getenv('MODE')
+ADDRESSES = {
+  'dev': os.getenv('DEV_NODE_SERVER_ADDRESS'),
+  'prod': os.getenv('PROD_NODE_SERVER_ADDRESS')
+}
+print('mode: ', mode)
+
+NODE_SERVER_ADDRESS = ADDRESSES[mode]
+PORT= os.getenv('PORT')
 
 app = FastAPI()
 app.add_middleware(
@@ -61,7 +69,7 @@ async def get_image(file: UploadFile = File(...),
     
     # send to nextjs api to get job results
     print('sending to nextjs api')
-    response = requests.post(f'{node_server_address}/api/search', json={'message': json.dumps({
+    response = requests.post(f'{NODE_SERVER_ADDRESS}/api/search', json={'message': json.dumps({
         'skills': resume_json['skills'],
         'languages': resume_json['languages'],
         'experiences': resume_json['experiences'],
