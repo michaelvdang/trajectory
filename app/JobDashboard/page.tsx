@@ -39,7 +39,7 @@ export default function Home() {
 
   return (
     <>
-    <div className="min-h-screen bg-white text-black flex flex-col overflow-hidden">
+    <div className="min-h-screen bg-red-900 text-black flex flex-col overflow-hidden">
       
       <Header/>
       <header className="bg-gradient-to-br from-purple-200 to-purple-300 p-4 border-b border-black shadow-md">
