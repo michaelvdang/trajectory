@@ -111,7 +111,7 @@ export default function Home() {
                 Welcome!
               </h1>
               <div className="text-center">
-                <div className="text-sm text-red-500">Progress</div>
+                <div className="text-sm text-purple-500">Progress</div>
                 <div className="text-5xl font-bold text-purple-800">{completedTasks * 16}%</div>
                 <div className="text-xs text-gray-600">+{completedTasks * 16}% INCREASE</div>
               </div>
