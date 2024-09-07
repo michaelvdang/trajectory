@@ -18,14 +18,7 @@ export const Header = () => {
           About
         </Link>
         <SignedOut>
-          <Link
-            href="/waitlist/join"
-            className="nav-item text-violet-900 hover:text-gray-600"
-          >
-            Join Waitlist
-            {/* <SignInButton /> */}
-            {/* About */}
-          </Link>
+          
           <Link
             href="#"
             className="nav-item text-violet-900 hover:text-gray-600"
@@ -35,12 +28,7 @@ export const Header = () => {
           </Link>
         </SignedOut>
         <SignedIn>
-          <Link
-            href="/JobDashboard"
-            className="nav-item text-violet-900 hover:text-gray-600"
-          >
-            Dashboard
-          </Link>
+          
           <Link
             href="/profile"
             className="nav-item text-violet-900 hover:text-gray-600"
@@ -51,7 +39,7 @@ export const Header = () => {
             href="/get-started/upload"
             className="nav-item bg-white text-gray-900 hover:bg-violet-500/30 hover:text-gray-600"
           >
-            Get Started
+            Upload
           </Link>
           <UserButton />
         </SignedIn>
