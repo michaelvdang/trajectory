@@ -68,7 +68,7 @@ export async function POST (
     });
 
     // console.log('parseResponse: ', parseResponse);
-    console.log('parseResponse.data: ', parseResponse.data);
+    console.log('parseResponse.data: ', parseResponse.data); 
 
     const userData = {...parseResponse.data.userData};
 
