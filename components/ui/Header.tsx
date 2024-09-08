@@ -12,7 +12,7 @@ export const Header = () => {
           Home
         </Link>
         <Link
-          href="/about"
+          href="/About"
           className="nav-item text-violet-900 hover:text-gray-600"
         >
           About
