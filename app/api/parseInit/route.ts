@@ -85,6 +85,7 @@ export async function POST (
       headers: {
         'Content-Type': 'application/json',
       },
+      timeout: 60000,
     });
     console.log('searchResponse.data.matches;  ', searchResponse.data.matches);
     const topMatches: MatchData[] = [];
