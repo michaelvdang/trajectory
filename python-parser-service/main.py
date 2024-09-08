@@ -12,17 +12,6 @@ import os
 
 load_dotenv()
 
-mode = os.getenv('MODE')
-ADDRESSES = {
-  'dev': os.getenv('DEV_NODE_SERVER_ADDRESS'),
-  'prod': os.getenv('PROD_NODE_SERVER_ADDRESS')
-}
-print('mode: ', mode)
-
-NODE_SERVER_ADDRESS = ADDRESSES[mode or 'dev']
-PORT= os.getenv('PORT')
-print('NODE_SERVER_ADDRESS: ', NODE_SERVER_ADDRESS)
-
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
@@ -75,6 +64,8 @@ async def get_image(file: UploadFile = File(...),
     # # resume_json = fake_data['userData']
     # # print('topMatches: ', topMatches)
     # # print('resume_json: ', resume_json)
+
+    print('response json: ', resume_json)
 
     return {
         # 'topMatches': topMatches,
