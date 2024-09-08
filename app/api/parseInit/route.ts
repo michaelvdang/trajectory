@@ -81,7 +81,7 @@ export async function POST (
       'projects': userData.projects,
       'certifications': userData.certifications,
     }
-    const searchResponse = await axios.post('http://localhost:3000/api/search', payload, {
+    const searchResponse = await axios.post('/api/search', payload, {
       headers: {
         'Content-Type': 'application/json',
       },
