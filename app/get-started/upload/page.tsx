@@ -126,7 +126,8 @@ const FileUpload = () => {
     if (uploadStatus === 'successful') {
       // // start parsing the uploaded file and save parsed data to firestore
       console.log("calling parseInit");
-      fetch(`http://localhost:3000/api/parseInit`, {
+      fetch(`/api/parseInit`, {
+      // fetch(`http://localhost:3000/api/parseInit`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
