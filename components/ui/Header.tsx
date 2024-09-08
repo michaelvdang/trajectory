@@ -23,7 +23,7 @@ export const Header = () => {
             href="#"
             className="nav-item text-violet-900 hover:text-gray-600"
           >
-            <SignInButton />
+            <SignInButton forceRedirectUrl="/profile" />
             {/* About */}
           </Link>
         </SignedOut>

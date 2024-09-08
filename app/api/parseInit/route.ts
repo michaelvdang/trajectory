@@ -10,19 +10,27 @@ import { MatchData } from "@/types";
 
 const MODE = process.env.MODE as 'dev' | 'prod' | undefined;
 console.log('mode: ', MODE);
-const ADDRESSES: Record<'dev' | 'prod', string | undefined>  = {
+const PYTHON_SERVER_ADDRESSES: Record<'dev' | 'prod', string | undefined>  = {
   'dev': process.env.DEV_PYTHON_SERVER_ADDRESS,
   'prod': process.env.PROD_PYTHON_SERVER_ADDRESS,
 }
-console.log('ADDRESSES: ', ADDRESSES);
+console.log('ADDRESSES: ', PYTHON_SERVER_ADDRESSES);
 
 // Validate MODE and provide a default address if MODE is invalid
-if (!MODE || !ADDRESSES[MODE]) {
+if (!MODE || !PYTHON_SERVER_ADDRESSES[MODE]) {
   console.error(`Invalid or missing MODE environment variable. Defaulting to 'dev'.`);
 }
 
-const PYTHON_SERVER_ADDRESS = ADDRESSES[MODE || 'dev'];
+const PYTHON_SERVER_ADDRESS = PYTHON_SERVER_ADDRESSES[MODE || 'dev'];
 console.log('using PYTHON_SERVER_ADDRESS: ', PYTHON_SERVER_ADDRESS);
+
+const BASE_URL_ADDRESSES: Record<'dev' | 'prod', string | undefined>  = {
+  'dev': process.env.DEV_BASE_URL,
+  'prod': process.env.PROD_BASE_URL,
+}
+
+const BASE_URL = BASE_URL_ADDRESSES[MODE || 'dev'];
+console.log('using BASE_URL: ', BASE_URL);
 
 const Bucket = process.env.S3_BUCKET;
 
