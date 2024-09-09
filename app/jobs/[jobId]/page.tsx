@@ -250,7 +250,7 @@ const JobPage = ({ params }: { params: { jobId: string } }) => {
                 <div className="w-full max-w-4xl px-4 sm:px-6 lg:px-8 mb-4 mt-6"> {/* Adjusted spacing */}
                   <div className="bg-gray-300 h-4 rounded-lg">
                     <div
-                      className="bg-purple-950 h-4 rounded-lg"
+                      className="bg-purple-800 h-4 rounded-lg"
                       style={{ width: `${calculateOverallScore()}%` }}  // Dynamically set the width based on the overall score
                     ></div>
                   </div>
