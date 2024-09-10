@@ -66,41 +66,29 @@ export default function AboutPage() {
           </p>
         </div>
         <div className="max-w-2xl mx-auto px-4 py-8 relative">
-            <Link href="/Developers">
+            <a href="https://linktr.ee/Trajectory.AI">
                 <div className="flex justify-center items-center gap-2 mt-6 text-white">
                 <h2 className="text-4xl md:text-6xl font-bold tracking-tighter bg-gradient-to-b from-white to-violet-300 text-transparent bg-clip-text">
-                    Meet The Team
+                    Meet The Team ➜
                 </h2>
-                <Image
-                    src={ArrowRight}
-                    alt="Arrow Right"
-                    width={28} 
-                    height={28} 
-                    className="text-white fill-current"
-                />
+                
                 </div>
-            </Link>
+            </a>
             </div>
 
       </div>
       <div className="max-w-2xl mx-auto px-4 py-8 relative">
-            <Link href="/Developers">
+            <a href="https://forms.gle/66oRtgHtoMvuReQ3A">
                 <div className="flex justify-center items-center gap-2 mt-6 text-white">
                 <h2 className="text-4xl md:text-6xl font-bold tracking-tighter bg-gradient-to-b from-white to-violet-300 text-transparent bg-clip-text">
-                    Give Feedback
+                    Give Feedback ➜
                 </h2>
-                <Image
-                    src={ArrowRight}
-                    alt="Arrow Right"
-                    width={28} 
-                    height={28} 
-                    className="text-white fill-current"
-                />
+               
                 </div>
                 <p className="text-xl text-[#a47bc4] tracking-tight mt-5 text-center">
             Your opinion matters. Let us know what you think!
                 </p>
-            </Link>
+            </a>
             
 
       </div>

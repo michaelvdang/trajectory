@@ -16,10 +16,10 @@ export const Footer = () => {
 
         {/* Navigation Links */}
         <nav className="flex flex-col lg:flex-row lg:gap-7 gap-4 text-center lg:text-left">
-          <Link href="#" className="text-white/70 hover:text-purple-300 text-sm transition">
-            Developers
-          </Link>
-          <Link href="#" className="text-white/70 hover:text-purple-300 text-sm transition">
+          <a href="https://forms.gle/66oRtgHtoMvuReQ3A" className="text-white/70 hover:text-purple-300 text-sm transition">
+            Feedback
+          </a>
+          <Link href="/" className="text-white/70 hover:text-purple-300 text-sm transition">
             Main Page
           </Link>
           <Link href="#" className="text-white/70 hover:text-purple-300 text-sm transition">
@@ -28,9 +28,9 @@ export const Footer = () => {
           <Link href="#" className="text-white/70 hover:text-purple-300 text-sm transition">
             Terms of Service
           </Link>
-          <Link href="#" className="text-white/70 hover:text-purple-300 text-sm transition">
+          <a href="https://linktr.ee/Trajectory.AI" className="text-white/70 hover:text-purple-300 text-sm transition">
             Know the Team
-          </Link>
+          </a>
         </nav>
       </div>
 
