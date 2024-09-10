@@ -32,20 +32,22 @@ export const Hero = () => {
       </div>
 
       <div className="relative container flex flex-col items-center justify-center min-h-screen z-10">
-        <div className="max-w-lg mx-auto text-center scale-110"> {/* Added scale-110 */}
+        <div className="max-w-lg mx-auto text-center scale-110">
           <h1 className="font-serif text-3xl text-center mt-8 tracking-wide md:text-5xl"></h1>
-          <div className="relative flex flex-col -mt-auto py-auto ">
+          <div className="relative flex flex-col items-center md:items-start py-auto">
             <Image 
               src={textLogo} 
               alt="text" 
               width={256}
               height={256}
-              className="translate-x-1/2 -translate-top-1/2 " 
+              className=" lg:translate-x-1/2 lg:-translate-top-1/2 md:translate-x-1/2 md:-translate-top-1/2 sm:transform sm:translate-x-0 "
             />
           </div>
           <p className="text-black/60 md:text-lg tracking-tighter mb-6">
             Transform your career path: upload your resume and get a tailored roadmap to master the skills you need to succeed.
           </p>
+      
+
 
           <div className="flex flex-col items-center gap-4 md:flex-row justify-center">
             <Link href="/learn-more" className="inline-flex items-center gap-2 border border-white/15 px-6 h-12 rounded-xl">
