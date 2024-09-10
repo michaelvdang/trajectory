@@ -73,7 +73,7 @@ export async function POST (
       headers: {
         'Content-Type': 'application/pdf',
       },
-      timeout: 60000,
+      timeout: 120000,
     });
 
     // console.log('parseResponse: ', parseResponse);
