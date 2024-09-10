@@ -7,9 +7,9 @@ const items = [
       "This issue occurs when the resume provided is not up to general standard.",
   },
   {
-    question: "Why is my 'Dream Job' not showing up?",
+    question: "What if I dont have a resume?",
     answer:
-      "In case of such and issue, please submit feedback regarding your issue.",
+      "No problem! Just enter your dream job title and Trajectory has you covered.",
   },
   {
     question: "Can I change my plan later?",
