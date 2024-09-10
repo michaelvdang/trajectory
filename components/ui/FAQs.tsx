@@ -2,19 +2,19 @@ import grainImage from '@/assets/images/grain.jpg';
 
 const items = [
   {
-    question: "What payment methods do you accept?",
+    question: "Why are my resume details not showing up on my profile?",
     answer:
-      "We accept all major credit cards, PayPal, and various other payment methods depending on your location. Please contact our support team for more information on accepted payment methods in your region.",
+      "This issue occurs when the resume provided is not up to general standard.",
   },
   {
-    question: "How does the pricing work for teams?",
+    question: "Why is my 'Dream Job' not showing up?",
     answer:
-      "Our pricing is per user, per month. This means you only pay for the number of team members you have on your account. Discounts are available for larger teams and annual subscriptions.",
+      "In case of such and issue, please submit feedback regarding your issue.",
   },
   {
     question: "Can I change my plan later?",
     answer:
-      "Yes, you can upgrade or downgrade your plan at any time. Changes to your plan will be prorated and reflected in your next billing cycle.",
+      "Yes, you can upgrade or downgrade your plan at any time. Changes to your plan will be prorated and reflected in your next billing cycle. This version of Trajectory.AI is free to use.",
   },
   {
     question: "Is my data secure?",
