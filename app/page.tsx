@@ -9,6 +9,7 @@ import { CallToAction } from "@/components/ui/CallToAction";
 import { Footer } from "@/components/ui/Footer";
 import { DashPreview } from '@/components/ui/Dashpreview';
 
+
 export default function Home() {
   return (
     <>
@@ -18,6 +19,7 @@ export default function Home() {
     <DashPreview />
     <FAQs />
     <CallToAction />
+    <Footer />
     </>
   );
 };
