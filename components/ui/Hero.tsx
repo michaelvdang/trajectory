@@ -8,7 +8,7 @@ import { buttonVariants } from './button';
 import Link from 'next/link';
 import { Footer } from '@/components/ui/Footer';
 import { useUser } from '@clerk/nextjs';
-import { SignIn, SignInButton } from '@clerk/clerk-react';
+import { SignInButton } from '@clerk/nextjs';
 
 export const Hero = () => {
   const { isLoaded, isSignedIn, user } = useUser();
