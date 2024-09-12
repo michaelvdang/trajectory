@@ -7,8 +7,12 @@ import textLogo from '@/assets/images/TRAJECTORY__4_-removebg-preview.png';
 import { buttonVariants } from './button';
 import Link from 'next/link';
 import { Footer } from '@/components/ui/Footer';
+import { useUser } from '@clerk/nextjs';
+import { SignIn, SignInButton } from '@clerk/clerk-react';
 
 export const Hero = () => {
+  const { isLoaded, isSignedIn, user } = useUser();
+  
   return (
     <>
     <div className="relative py-48 md:py-48 lg:py-48 overflow-hidden"> {/* Reduced height */}
@@ -61,12 +65,28 @@ export const Hero = () => {
               />
             </Link>
 
-            <Link
+            {isLoaded && isSignedIn && user ? (
+              <Link
+                href="/profile"
+                className={buttonVariants({ variant: 'default' })}
+              >
+                Get Started
+              </Link>
+            ) : (
+              <Link
+                href="#"
+                className={buttonVariants({ variant: 'default' })}
+              >
+                <SignInButton forceRedirectUrl="/profile" />
+                {/* About */}
+              </Link>
+            )}
+            {/* <Link
               href="/get-started/upload"
               className={buttonVariants({ variant: 'default' })}
             >
               Get Started
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>
